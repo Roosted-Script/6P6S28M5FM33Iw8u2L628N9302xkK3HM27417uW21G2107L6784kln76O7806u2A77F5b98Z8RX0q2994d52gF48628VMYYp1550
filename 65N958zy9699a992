@@ -1,10 +1,27 @@
-No_key = hookfunction(syn.request, function(self)
+old = hookfunction(syn.request, function(self)
     if self.Method == "POST" and self.Url == "https://darkhub.maxt.church/checkKey" then
         return {
             StatusCode = 200,
             Body = "OK"
         }
     end
-    return No_key(self)
+    return old(self)
 end)
+
+old2 = hookfunction(isfile, function(...)
+    local args = {...}
+    if args[1]:find('DarkHubKey.DARKHUB') then
+        return true
+    end
+    return old2(...)
+end)
+
+old3 = hookfunction(readfile,function(...)
+    local args = {...}
+    if args[1]:find('DarkHubKey.DARKHUB') then
+        return "roosted"
+    end
+    return old3(...)
+end)
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RandomAdamYT/DarkHub/master/Init", true))()
