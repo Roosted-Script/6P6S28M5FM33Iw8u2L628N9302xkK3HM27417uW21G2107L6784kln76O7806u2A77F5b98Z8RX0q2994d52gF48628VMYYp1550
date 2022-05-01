@@ -1,0 +1,10 @@
+No_key = hookfunction(syn.request, function(self)
+    if self.Method == "POST" and self.Url == "https://darkhub.maxt.church/checkKey" then
+        return {
+            StatusCode = 200,
+            Body = "OK"
+        }
+    end
+    return No_key(self)
+end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RandomAdamYT/DarkHub/master/Init", true))()
