@@ -1,0 +1,67 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ACS = ReplicatedStorage:WaitForChild("ACS_Engine")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local ACS_0 = ACS:WaitForChild("Events").AcessId:InvokeServer(LocalPlayer.UserId)
+local SKP_9 = ACS_0.."-"..LocalPlayer.UserId
+
+function gun()
+    for _,player in pairs(Players:GetChildren()) do
+        if player.Character then
+            if player.Character:FindFirstChild("Humanoid") and player.Character.Humanoid.Health > 0 then
+                for _, v in pairs({"2K","K2","K5","K7","K14","소음기 권총","늅권총","늅기관총","저주받은 총","긴 리볼버"}) do
+                    local tool = player.Character:FindFirstChild(v) or player:FindFirstChild("Backpack"):FindFirstChild(v)
+                    if tool ~= nil then
+                        return tool
+                    end
+                end
+            end
+        end
+    end
+end
+local SKP_1 = gun()
+
+local SKP_5 = nil
+if SKP_1 then
+	if SKP_1:FindFirstChild("ACS_Settings") then
+		SKP_5 = require(SKP_1:FindFirstChild("ACS_Settings"))
+	end
+end
+local SKP_6 = {
+	["SpreadRM"] = 1,
+	["RecoilPowerStepAmount"] = 1,
+	["Zoom2Value"] = 70,
+	["MaxSpread"] = 1,
+	["MinRecoilPower"] = 1,
+	["DamageMod"] = 1,
+	["gunRecoilMod"] = {
+		["RecoilRight"] = 1,
+		["RecoilUp"] = 1,
+		["RecoilTilt"] = 1,
+		["RecoilLeft"] = 1
+	},
+	["MaxRecoilPower"] = 1,
+	["AimInaccuracyStepAmount"] = 1,
+	["WalkMult"] = 1,
+	["AimRM"] = 1,
+	["ZoomValue"] = 70,
+	["minDamageMod"] = 1,
+	["MinSpread"] = 1,
+	["adsTime"] = 1,
+	["AimInaccuracyDecrease"] = 1,
+	["camRecoilMod"] = {
+		["RecoilRight"] = 1,
+		["RecoilTilt"] = 1,
+		["RecoilUp"] = 1,
+		["RecoilLeft"] = 1
+	},
+	["MuzzleVelocity"] = 1
+}
+
+for i,v in pairs(Players:GetChildren()) do
+    a = v.Character:FindFirstChild("Humanoid")
+    if a then
+		ACS.Events.Damage:InvokeServer(SKP_1, a, 0, 2, SKP_5, SKP_6, nil, nil, SKP_9)
+    end
+end
