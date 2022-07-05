@@ -3,7 +3,7 @@ repeat
 until game:IsLoaded()
 wait()
 local Time
-local 
+local Wave
 if game.PlaceId == 5591597781 then
     Time = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Time")
     Wave = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Wave")
