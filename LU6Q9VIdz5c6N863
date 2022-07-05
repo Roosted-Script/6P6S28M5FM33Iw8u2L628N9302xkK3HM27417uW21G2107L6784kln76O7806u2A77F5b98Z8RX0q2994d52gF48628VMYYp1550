@@ -162,12 +162,6 @@ if not getgenv().ExecutedAlr then
                 game.Lighting.FogEnd = 10000000
                 game.Lighting.Brightness = 1
  
-                local u = Instance.new("Part")
-                u.Transparency = 1
-                u.Anchored = true
-                u.CanCollide = true
-                u.Parent = game.Workspace
-                u.CFrame = t
                 if game.CoreGui:FindFirstChild("AutoStratsLogger") then
                     game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
                 end
