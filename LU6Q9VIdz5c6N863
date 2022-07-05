@@ -2,13 +2,6 @@ repeat
     wait()
 until game:IsLoaded()
 wait()
-local Time
-local Wave
-if game.PlaceId == 5591597781 then
-    Time = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Time")
-    Wave = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Wave")
-end
---string.split(Time,"-")
 local a = {}
 if not getgenv().ExecutedAlr then
     if syn and not getgenv().IsMultiStrat and not getgenv().ExecDis and not getgenv().Multiplayer then
@@ -80,6 +73,19 @@ if not getgenv().ExecutedAlr then
             return false
         end
     end
+    stateRep = nil
+    if isgame() then
+        function getStateRep()
+            for h, b in pairs(game:GetService("ReplicatedStorage").StateReplicators:GetChildren()) do
+                if b:GetAttribute("TimeScale") then
+                    return b
+                end
+            end
+        end
+        repeat
+            stateRep = getStateRep()
+        until stateRep
+    end
     spawn(
         function()
             wait(10)
@@ -90,36 +96,36 @@ if not getgenv().ExecutedAlr then
                     isgame() and getgenv().Multiplayer and #game.Players:GetChildren() > getgenv().PlayerNumber and
                         getgenv().PlayerType == "Host"
                  then
-                    local h = math.huge
-                    local i = game:GetService("HttpService")
-                    local j = game:GetService("TeleportService")
-                    local k, l
-                    local m = math.huge
-                    local n = 0
+                    local i = math.huge
+                    local j = game:GetService("HttpService")
+                    local k = game:GetService("TeleportService")
+                    local l, m
+                    local n = math.huge
+                    local o = 0
                     repeat
-                        local o =
+                        local p =
                             "https://games.roblox.com/v1/games/" ..
                             game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
-                        if k then
-                            o = o .. "&cursor=" .. k
+                        if l then
+                            p = p .. "&cursor=" .. l
                         end
-                        local p = i:JSONDecode(game:HttpGet(o))
-                        if p then
-                            k = p.nextPageCursor or nil
-                            n = n + 1
-                            for q, b in pairs(p.data) do
+                        local q = j:JSONDecode(game:HttpGet(p))
+                        if q then
+                            l = q.nextPageCursor or nil
+                            o = o + 1
+                            for r, b in pairs(q.data) do
                                 b.playing = b.playing or math.huge
                                 b.id = b.id or ""
-                                if b.id ~= game.JobId and b.playing <= m then
-                                    m = b.playing
-                                    l = b.id
+                                if b.id ~= game.JobId and b.playing <= n then
+                                    n = b.playing
+                                    m = b.id
                                 end
                             end
                         end
-                    until not k or n >= h
-                    if l then
-                        getgenv().Connection:Send('{"client":"Host","action":"Teleport","jobid":"' .. l .. '"}')
-                        j:TeleportToPlaceInstance(3260590327, l)
+                    until not l or o >= i
+                    if m then
+                        getgenv().Connection:Send('{"client":"Host","action":"Teleport","jobid":"' .. m .. '"}')
+                        k:TeleportToPlaceInstance(3260590327, m)
                     end
                 end
             end
@@ -129,7 +135,7 @@ if not getgenv().ExecutedAlr then
         spawn(
             function()
                 wait(3)
-                for r, b in pairs(game.Workspace.Map:GetChildren()) do
+                for h, b in pairs(game.Workspace.Map:GetChildren()) do
                     if b.Name ~= "Paths" then
                         b:Remove()
                     end
@@ -147,7 +153,7 @@ if not getgenv().ExecutedAlr then
         spawn(
             function()
                 wait(3)
-                for r, b in pairs(game:GetService("Lighting"):GetChildren()) do
+                for h, b in pairs(game:GetService("Lighting"):GetChildren()) do
                     if b.Name ~= "Sky" then
                         b:Remove()
                     end
@@ -155,6 +161,13 @@ if not getgenv().ExecutedAlr then
                 game.Lighting.FogStart = 10000000
                 game.Lighting.FogEnd = 10000000
                 game.Lighting.Brightness = 1
+ 
+                local u = Instance.new("Part")
+                u.Transparency = 1
+                u.Anchored = true
+                u.CanCollide = true
+                u.Parent = game.Workspace
+                u.CFrame = t
                 if game.CoreGui:FindFirstChild("AutoStratsLogger") then
                     game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
                 end
@@ -591,7 +604,7 @@ if not getgenv().ExecutedAlr then
                                 if getgenv().repeating then
                                     getgenv().repeating = false
                                     local at = 0
-                                    for q, au in pairs(game:GetService("Workspace").Elevators:GetChildren()) do
+                                    for r, au in pairs(game:GetService("Workspace").Elevators:GetChildren()) do
                                         local av = au.State.Map.Title
                                         local aw = require(au.Settings).Type
                                         local ax = au.State.Players
@@ -609,7 +622,7 @@ if not getgenv().ExecutedAlr then
                                                 if getgenv().Multiplayer and getgenv().Connection then
                                                     getgenv().Connection:Send(
                                                         '{"client":"Host","action":"Elevator","number":' ..
-                                                            tostring(q) .. "}"
+                                                            tostring(r) .. "}"
                                                     )
                                                 end
                                                 while wait() do
@@ -721,7 +734,7 @@ if not getgenv().ExecutedAlr then
                                         if getgenv().timer >= 15 then
                                             getgenv().status = "Force changing maps..."
                                             getgenv().timer = 0
-                                            for r, b in pairs(game:GetService("Workspace").Elevators:GetChildren()) do
+                                            for h, b in pairs(game:GetService("Workspace").Elevators:GetChildren()) do
                                                 local aw = require(b.Settings).Type
                                                 local ax = b.State.Players
                                                 if aw == ar and ax.Value <= 0 then
@@ -794,8 +807,8 @@ if not getgenv().ExecutedAlr then
         getgenv().TroopName4NEW = aE
         getgenv().TroopName5NEW = aF
         getgenv().troops5 = {}
-        for r, b in next, game.ReplicatedStorage.RemoteFunction:InvokeServer("Session", "Search", "Inventory.Troops") do
-            table.insert(getgenv().troops5, r)
+        for h, b in next, game.ReplicatedStorage.RemoteFunction:InvokeServer("Session", "Search", "Inventory.Troops") do
+            table.insert(getgenv().troops5, h)
         end
         CheckTroop(aB)
         CheckTroop(aC)
@@ -874,8 +887,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     table.insert(aG, ah)
                     table.insert(aG, aH)
                     table.insert(aG, aI)
@@ -910,7 +923,7 @@ if not getgenv().ExecutedAlr then
                         end
                     until aQ or getgenv().PassPlace == true
                     getgenv().Placing = false
-                    --getgenv().output("Placed " .. ah)
+                    getgenv().output("Placed " .. ah)
                     getgenv().PassPlace = false
                 end
             end
@@ -927,9 +940,9 @@ if not getgenv().ExecutedAlr then
                     local ah = aS
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) and
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) and
                         game.Workspace.Towers:FindFirstChild(tostring(ah)) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak) and
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak) and
                             game.Workspace.Towers:FindFirstChild(tostring(ah))
                     repeat
                         wait()
@@ -983,8 +996,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     getgenv().output(
                         "Sold (Troop " ..
                             getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")"
@@ -1001,8 +1014,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     skip()
                 end
             end
@@ -1018,8 +1031,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     ability(aS, ao)
                 end
             end
@@ -1036,8 +1049,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     repeat
                         wait()
                     until game:GetService("Workspace").Towers:FindFirstChild(tostring(aU))
@@ -1124,8 +1137,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        tonumber(string.split(Wave.Text," ")[2]) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     repeat
                         wait()
                     until game.Workspace.Towers:FindFirstChild(tostring(aS))
