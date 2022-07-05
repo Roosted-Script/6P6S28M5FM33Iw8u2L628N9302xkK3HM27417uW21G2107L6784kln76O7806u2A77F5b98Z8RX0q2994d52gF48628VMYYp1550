@@ -2,6 +2,9 @@ repeat
     wait()
 until game:IsLoaded()
 wait()
+local Time = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Time")
+local Wave = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Wave")
+--string.split(Time,"-")
 local a = {}
 if not getgenv().ExecutedAlr then
     if syn and not getgenv().IsMultiStrat and not getgenv().ExecDis and not getgenv().Multiplayer then
@@ -867,8 +870,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     table.insert(aG, ah)
                     table.insert(aG, aH)
                     table.insert(aG, aI)
@@ -920,9 +923,9 @@ if not getgenv().ExecutedAlr then
                     local ah = aS
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) and
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) and
                         game.Workspace.Towers:FindFirstChild(tostring(ah)) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak) and
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak) and
                             game.Workspace.Towers:FindFirstChild(tostring(ah))
                     repeat
                         wait()
@@ -976,8 +979,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     getgenv().output(
                         "Sold (Troop " ..
                             getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")"
@@ -994,8 +997,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     skip()
                 end
             end
@@ -1011,8 +1014,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     ability(aS, ao)
                 end
             end
@@ -1029,8 +1032,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     repeat
                         wait()
                     until game:GetService("Workspace").Towers:FindFirstChild(tostring(aU))
@@ -1117,8 +1120,8 @@ if not getgenv().ExecutedAlr then
                 if isgame() then
                     repeat
                         wait()
-                    until e.State.Wave.Value == aK and e.State.Timer.Time.Value == conv(aj, ak) or
-                        e.State.Wave.Value == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
+                    until string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value == conv(aj, ak) or
+                        string.split(Wave.Text," ")[2] == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
                     repeat
                         wait()
                     until game.Workspace.Towers:FindFirstChild(tostring(aS))
