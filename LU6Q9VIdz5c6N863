@@ -3,8 +3,8 @@ repeat
 until game:IsLoaded()
 wait()
 if game.PlaceId == 5591597781 then
-local Time = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Time")
-local Wave = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Wave")
+    local Time = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Time")
+    local Wave = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("GameGui"):WaitForChild("Health"):WaitForChild("Wave")
 end
 --string.split(Time,"-")
 local a = {}
