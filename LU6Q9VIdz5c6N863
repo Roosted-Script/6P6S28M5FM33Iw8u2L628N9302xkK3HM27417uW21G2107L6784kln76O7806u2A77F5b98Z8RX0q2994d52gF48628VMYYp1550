@@ -150,235 +150,21 @@ if not getgenv().ExecutedAlr then
         )
     end
     if isgame() then
-        spawn(
-            function()
-                wait(3)
-                for h, b in pairs(game:GetService("Lighting"):GetChildren()) do
-                    if b.Name ~= "Sky" then
-                        b:Remove()
-                    end
-                end
-                game.Lighting.FogStart = 10000000
-                game.Lighting.FogEnd = 10000000
-                game.Lighting.Brightness = 1
-                if game.CoreGui:FindFirstChild("AutoStratsLogger") then
-                    game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
-                end
-                local v = Instance.new("ScreenGui")
-                local w = Instance.new("Frame")
-                local x = Instance.new("ImageLabel")
-                local y = Instance.new("Frame")
-                local z = Instance.new("TextLabel")
-                local A = Instance.new("ScrollingFrame")
-                v.Name = "AutoStratsLogger"
-                v.Parent = game:WaitForChild("CoreGui")
-                v.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-                w.Name = "Main"
-                w.Parent = v
-                w.BackgroundColor3 = Color3.fromRGB(23, 21, 30)
-                w.BorderSizePixel = 0
-                w.Position = UDim2.new(0.544935644, 0, 0.355803162, 0)
-                w.Size = UDim2.new(0, 500, 0, 400)
-                x.Name = "Glow"
-                x.Parent = w
-                x.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                x.BackgroundTransparency = 1.000
-                x.BorderSizePixel = 0
-                x.Position = UDim2.new(0, -15, 0, -15)
-                x.Size = UDim2.new(1, 30, 1, 30)
-                x.ZIndex = 0
-                x.Image = "rbxassetid://4996891970"
-                x.ImageColor3 = Color3.fromRGB(15, 15, 15)
-                x.ScaleType = Enum.ScaleType.Slice
-                x.SliceCenter = Rect.new(20, 20, 280, 280)
-                y.Name = "Top_Container"
-                y.Parent = w
-                y.AnchorPoint = Vector2.new(0.5, 0)
-                y.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                y.BackgroundTransparency = 1.000
-                y.Position = UDim2.new(0.5, 0, 0, 18)
-                y.Size = UDim2.new(1, -40, 0, 20)
-                z.Name = "Title"
-                z.Parent = y
-                z.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                z.BackgroundTransparency = 1.000
-                z.Position = UDim2.new(0.00764120743, 0, -0.400000006, 0)
-                z.Size = UDim2.new(0.981785059, 0, 1.45000005, 0)
-                z.Font = Enum.Font.GothamBlack
-                z.Text = "AUTOSTRATS LOGGER"
-                z.TextColor3 = Color3.fromRGB(255, 255, 255)
-                z.TextSize = 30.000
-                z.TextXAlignment = Enum.TextXAlignment.Left
-                A.Name = "Scroll"
-                A.Parent = w
-                A.Active = true
-                A.AnchorPoint = Vector2.new(0.5, 0)
-                A.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                A.BackgroundTransparency = 1.000
-                A.BorderSizePixel = 0
-                A.Position = UDim2.new(0.5, 4, 0, 59)
-                A.Size = UDim2.new(1, -20, 1, -67)
-                A.BottomImage = "rbxassetid://5234388158"
-                A.CanvasSize = UDim2.new(200, 0, 100, 0)
-                A.MidImage = "rbxassetid://5234388158"
-                A.ScrollBarThickness = 8
-                A.TopImage = "rbxassetid://5234388158"
-                A.VerticalScrollBarInset = Enum.ScrollBarInset.Always
-                A.ChildAdded:Connect(
-                    function()
-                        if #A:GetChildren() > 16 then
-                            A.CanvasPosition = Vector2.new(0, A.CanvasPosition.Y + 20)
-                        end
-                    end
-                )
-                local function B()
-                    local C = Instance.new("LocalScript", w)
-                    C.Name = "Dragify"
-                    local D = game:GetService("UserInputService")
-                    function dragify(E)
-                        dragToggle = nil
-                        dragInput = nil
-                        dragStart = nil
-                        local F = nil
-                        function updateInput(G)
-                            local H = G.Position - dragStart
-                            local I =
-                                UDim2.new(
-                                startPos.X.Scale,
-                                startPos.X.Offset + H.X,
-                                startPos.Y.Scale,
-                                startPos.Y.Offset + H.Y
-                            )
-                            game:GetService("TweenService"):Create(E, TweenInfo.new(0.1), {Position = I}):Play()
-                        end
-                        E.InputBegan:Connect(
-                            function(G)
-                                if
-                                    (G.UserInputType == Enum.UserInputType.MouseButton1 or
-                                        G.UserInputType == Enum.UserInputType.Touch) and
-                                        D:GetFocusedTextBox() == nil
-                                 then
-                                    dragToggle = true
-                                    dragStart = G.Position
-                                    startPos = E.Position
-                                    G.Changed:Connect(
-                                        function()
-                                            if G.UserInputState == Enum.UserInputState.End then
-                                                dragToggle = false
-                                            end
-                                        end
-                                    )
-                                end
-                            end
-                        )
-                        E.InputChanged:Connect(
-                            function(G)
-                                if
-                                    G.UserInputType == Enum.UserInputType.MouseMovement or
-                                        G.UserInputType == Enum.UserInputType.Touch
-                                 then
-                                    dragInput = G
-                                end
-                            end
-                        )
-                        game:GetService("UserInputService").InputChanged:Connect(
-                            function(G)
-                                if G == dragInput and dragToggle then
-                                    updateInput(G)
-                                end
-                            end
-                        )
-                    end
-                    dragify(C.Parent)
-                end
-                B()
-                local function J()
-                    local C = Instance.new("LocalScript", w)
-                    C.Name = "Positioning"
-                    C.Parent:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), "Out", "Quad", 1)
-                    C.Parent.Draggable = true
-                end
-                J()
-                local K = -0.0073
-                writefile("TDS_AutoStrat/LastLog.txt", "--[START OF LOG]--")
-                function TimeConverter(b)
-                    if b <= 9 then
-                        local conv = "0" .. b
-                        return conv
-                    else
-                        return b
-                    end
-                end
-                getgenv().output = function(L)
-                    local M = os.date("*t")["hour"]
-                    local N = os.date("*t")["min"]
-                    local O = os.date("*t")["sec"]
-                    local P = Color3.fromRGB(255, 255, 255)
-                    local Q = Instance.new("TextLabel", A)
-                    Q.Text = "[" .. TimeConverter(M) .. ":" .. TimeConverter(N) .. ":" .. TimeConverter(O) .. "] " .. L
-                    appendfile(
-                        "TDS_AutoStrat/LastLog.txt",
-                        "\n[" .. TimeConverter(M) .. ":" .. TimeConverter(N) .. ":" .. TimeConverter(O) .. "] " .. L
-                    )
-                    Q.Size = UDim2.new(0.005, 0, 0.001, 0)
-                    Q.Position = UDim2.new(0, 0, .007 + K, 0)
-                    Q.Font = Enum.Font.SourceSansSemibold
-                    Q.TextColor3 = P
-                    Q.TextStrokeTransparency = 0
-                    Q.BackgroundTransparency = 1
-                    Q.BackgroundColor3 = Color3.new(0, 0, 0)
-                    Q.BorderSizePixel = 0
-                    Q.BorderColor3 = Color3.new(0, 0, 0)
-                    Q.FontSize = "Size14"
-                    Q.TextXAlignment = Enum.TextXAlignment.Left
-                    Q.ClipsDescendants = true
-                    K = K + 0.0005
+        spawn(function()
+            wait(3)
+            for h, b in pairs(game:GetService("Lighting"):GetChildren()) do
+                if b.Name ~= "Sky" then
+                    b:Remove()
                 end
             end
-        )
+            game.Lighting.FogStart = 10000000
+            game.Lighting.FogEnd = 10000000
+            game.Lighting.Brightness = 1
+            if game.CoreGui:FindFirstChild("AutoStratsLogger") then
+                game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
+            end
+        end)
     end
-    spawn(
-        function()
-            if isgame() and getgenv().Debug then
-                game.Workspace.Towers.ChildAdded:Connect(
-                    function(b)
-                        wait(1)
-                        repeat
-                            wait()
-                        until tonumber(b.Name)
-                        local a7 = Instance.new("BillboardGui")
-                        a7.Parent = b:WaitForChild("HumanoidRootPart")
-                        a7.Adornee = b:WaitForChild("HumanoidRootPart")
-                        a7.StudsOffsetWorldSpace = Vector3.new(0, 2, 0)
-                        a7.Size = UDim2.new(0, 250, 0, 50)
-                        a7.AlwaysOnTop = true
-                        local a8 = Instance.new("TextLabel")
-                        a8.Parent = a7
-                        a8.BackgroundTransparency = 1
-                        a8.Text = b.Name
-                        a8.Font = "Legacy"
-                        a8.Size = UDim2.new(1, 0, 0, 70)
-                        a8.TextSize = 52
-                        a8.TextScaled = fals
-                        a8.TextColor3 = Color3.new(0, 0, 0)
-                        a8.TextStrokeColor3 = Color3.new(0, 0, 0)
-                        a8.TextStrokeTransparency = 0.5
-                        local a8 = Instance.new("TextLabel")
-                        a8.Parent = a7
-                        a8.BackgroundTransparency = 1
-                        a8.Text = b.Name
-                        a8.Font = "Legacy"
-                        a8.Size = UDim2.new(1, 0, 0, 70)
-                        a8.TextSize = 50
-                        a8.TextScaled = false
-                        a8.TextColor3 = Color3.new(1, 0, 0)
-                        a8.TextStrokeColor3 = Color3.new(0, 0, 0)
-                        a8.TextStrokeTransparency = 0.5
-                    end
-                )
-            end
-        end
-    )
     if not isgame() then
         f:InvokeServer("Login", "Claim")
         f:InvokeServer("Session", "Search", "Login")
@@ -507,7 +293,6 @@ if not getgenv().ExecutedAlr then
     function skip()
         if isgame() then
             f:InvokeServer("Waves", "Skip")
-            pcall(function() getgenv().output("Skipped Wave") end)
         end
     end
     function conv(aj, ak)
@@ -532,7 +317,6 @@ if not getgenv().ExecutedAlr then
                 "Activate",
                 {["Troop"] = game.Workspace.Towers[tostring(ah)], ["Name"] = ao}
             )
-            pcall(function() getgenv().output("Used Ability (Troop " .. getTroopType(game.Workspace.Towers[tostring(ah)]) .. " With Number " .. tostring(ah) .. " Ability " .. ao .. ")") end)
         end
     end
     writefile("TDS_AutoStrat/LastStrat.txt", "")
@@ -763,7 +547,6 @@ if not getgenv().ExecutedAlr then
                         aA = f:InvokeServer("Difficulty", "Vote", az)
                         wait()
                     until aA
-                    pcall(function() getgenv().output("Selected Mode (Mode " .. az .. ")") end)
                 end
             )
         end
@@ -912,7 +695,6 @@ if not getgenv().ExecutedAlr then
                         end
                     until aQ or getgenv().PassPlace == true
                     getgenv().Placing = false
-                    pcall(function() getgenv().output("Placed " .. ah) end)
                     getgenv().PassPlace = false
                 end
             end
@@ -938,7 +720,6 @@ if not getgenv().ExecutedAlr then
                     until getgenv().Upgrading == false
                     getgenv().Upgrading = true
                     if not game.Workspace.Towers:FindFirstChild(tostring(ah)) then
-                        pcall(function() getgenv().output("Warning! Troop with id " .. ah .. " has not been placed!") end)
                         local aQ = nil
                         local aR = 0
                         repeat
@@ -953,7 +734,6 @@ if not getgenv().ExecutedAlr then
                                 }
                             )
                         until aQ
-                        pcall(function() getgenv().output("Placed " .. aG[aS]) end)
                     end
                     local aT = nil
                     repeat
@@ -967,8 +747,6 @@ if not getgenv().ExecutedAlr then
                         wait()
                     until aT
                     getgenv().Upgrading = false
-                     pcall(function() getgenv().output("Placed " .. aG[aS]) end)
-                    pcall(function() getgenv().output("Upgraded (Troop " .. getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(ah) .. ")") end)
                 end
             end
         )
@@ -985,7 +763,6 @@ if not getgenv().ExecutedAlr then
                         wait()
                     until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
                         tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
-                    pcall(function() getgenv().output("Sold (Troop " .. getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")") end)
                     sell(aS)
                 end
             end
@@ -1044,15 +821,17 @@ if not getgenv().ExecutedAlr then
                     repeat
                         wait()
                     until game:GetService("Workspace").Towers:FindFirstChild(tostring(aW))
+--[[                    
                     if getTroopType(game.Workspace.Towers[tostring(aU)]) ~= "Commander" then
-                        pcall(function() getgenv().output("Error, troop with id " .. aU .. " is not Commander!") end)
+                        getgenv().output("Error, troop with id " .. aU .. " is not Commander!")
                     end
                     if getTroopType(game.Workspace.Towers[tostring(aV)]) ~= "Commander" then
-                        pcall(function() getgenv().output("Error, troop with id " .. aV .. " is not Commander!") end)
+                        getgenv().output("Error, troop with id " .. aV .. " is not Commander!")
                     end
                     if getTroopType(game.Workspace.Towers[tostring(aW)]) ~= "Commander" then
-                        pcall(function() getgenv().output("Error, troop with id " .. aW .. " is not Commander!") end)
+                        getgenv().output("Error, troop with id " .. aW .. " is not Commander!")
                     end
+]]
                     function Act(aX)
                         if game:GetService("Workspace").Towers:FindFirstChild(tostring(aX)) then
                             local ad = game:GetService("Workspace").Towers:FindFirstChild(tostring(aX))
@@ -1070,7 +849,6 @@ if not getgenv().ExecutedAlr then
                                     }
                                 )
                             else
-                                pcall(function() getgenv().output("Detected stun on commander " .. tostring(aX) .. ", waiting...") end)
                                 repeat
                                     wait()
                                 until not ad.Replicator.Stuns:GetAttribute("1") and
@@ -1087,11 +865,9 @@ if not getgenv().ExecutedAlr then
                                 )
                             end
                         else
-                            pcall(function() getgenv().output("Commander " .. tostring(aX) .. " removed, aborting AutoChain...") end)
                             getgenv().breaks = true
                         end
                     end
-                    pcall(function() getgenv().output("Activated AutoChain (Troops " .. tostring(aU) .. ", " .. tostring(aV) .. ", " .. tostring(aW) .. ")") end)
                     while wait() do
                         if getgenv().breaks then
                             break
@@ -1129,7 +905,6 @@ if not getgenv().ExecutedAlr then
                         "Set",
                         {["Troop"] = game.Workspace.Towers:WaitForChild(tostring(aS))}
                     )
-                    pcall(function() getgenv().output("Changed Target (Troop " .. getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")") end)
                 end
             end
         )
