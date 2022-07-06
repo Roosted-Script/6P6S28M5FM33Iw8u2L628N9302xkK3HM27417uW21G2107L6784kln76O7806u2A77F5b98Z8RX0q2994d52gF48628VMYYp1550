@@ -917,7 +917,6 @@ if not getgenv().ExecutedAlr then
                         end
                     until aQ or getgenv().PassPlace == true
                     getgenv().Placing = false
-                    --getgenv().output("Placed " .. ah)
                     getgenv().PassPlace = false
                 end
             end
