@@ -316,10 +316,6 @@ if not getgenv().ExecutedAlr then
                     local P = Color3.fromRGB(255, 255, 255)
                     local Q = Instance.new("TextLabel", A)
                     Q.Text = "[" .. TimeConverter(M) .. ":" .. TimeConverter(N) .. ":" .. TimeConverter(O) .. "] " .. L
-                    appendfile(
-                        "TDS_AutoStrat/LastLog.txt",
-                        "\n[" .. TimeConverter(M) .. ":" .. TimeConverter(N) .. ":" .. TimeConverter(O) .. "] " .. L
-                    )
                     Q.Size = UDim2.new(0.005, 0, 0.001, 0)
                     Q.Position = UDim2.new(0, 0, .007 + K, 0)
                     Q.Font = Enum.Font.SourceSansSemibold
@@ -518,7 +514,6 @@ if not getgenv().ExecutedAlr then
     end
     writefile("TDS_AutoStrat/LastPrintLog.txt", "")
     function prints(an)
-        appendfile("TDS_AutoStrat/LastPrintLog.txt", tostring(an) .. "\n")
         print(tostring(an))
     end
     function ability(ah, ao)
@@ -539,27 +534,14 @@ if not getgenv().ExecutedAlr then
             )
         end
     end
-    writefile("TDS_AutoStrat/LastStrat.txt", "")
-    if getgenv().PotatoPC then
-        appendfile("TDS_AutoStrat/LastStrat.txt", "getgenv().PotatoPC = true\n")
-    end
-    if getgenv().Debug then
-        appendfile("TDS_AutoStrat/LastStrat.txt", "getgenv().Debug = true\n")
-    end
     if getgenv().GoldenPerks then
         generateline = "getgenv().GoldenPerks = {"
         for c = 1, #getgenv().GoldenPerks do
             generateline = generateline .. '"' .. getgenv().GoldenPerks[c] .. '",'
         end
         generateline = generateline .. "}\n"
-        appendfile("TDS_AutoStrat/LastStrat.txt", generateline)
     end
-    appendfile(
-        "TDS_AutoStrat/LastStrat.txt",
-        'local TDS = loadstring(game:HttpGet("https://raw.githubusercontent.com/banbuskox/dfhtyxvzexrxgfdzgzfdvfdz/main/ckmhjvskfkmsStratFun2", true))()\n'
-    )
     function a:Map(ap, aq, ar)
-        appendfile("TDS_AutoStrat/LastStrat.txt", "TDS:Map('" .. ap .. "', '" .. tostring(aq) .. "', '" .. ar .. "')\n")
         getgenv().mapc = ap
         if not getgenv().Multiplayer or getgenv().Multiplayer and getgenv().PlayerType == "Host" then
             if ar == "Hardcore" and game:GetService("Players").LocalPlayer.Level.Value < 50 then
@@ -758,7 +740,6 @@ if not getgenv().ExecutedAlr then
     end
     writefile("??????????.txt", "KxjhVghCJH")
     function a:Mode(az)
-        appendfile("TDS_AutoStrat/LastStrat.txt", "TDS:Mode('" .. az .. "')\n")
         if isgame() then
             spawn(
                 function()
@@ -767,7 +748,7 @@ if not getgenv().ExecutedAlr then
                         aA = f:InvokeServer("Difficulty", "Vote", az)
                         wait()
                     until aA
-                    getgenv().output("Selected Mode (Mode " .. az .. ")")
+                    --getgenv().output("Selected Mode (Mode " .. az .. ")")
                 end
             )
         end
@@ -789,10 +770,6 @@ if not getgenv().ExecutedAlr then
         if aF == nil then
             aF = "nil"
         end
-        appendfile(
-            "TDS_AutoStrat/LastStrat.txt",
-            "TDS:Loadout('" .. aB .. "', '" .. aC .. "', '" .. aD .. "', '" .. aE .. "', '" .. aF .. "')\n"
-        )
         getgenv().status = "Equipping Loadout..."
         getgenv().TroopNameNEW = aB
         getgenv().TroopName2NEW = aC
@@ -842,41 +819,6 @@ if not getgenv().ExecutedAlr then
                 if not aL then
                     aL = false
                 end
-                if aL then
-                    appendfile(
-                        "TDS_AutoStrat/LastStrat.txt",
-                        "TDS:Place('" ..
-                            ah ..
-                                "', " ..
-                                    aH ..
-                                        ", " ..
-                                            aI ..
-                                                ", " ..
-                                                    aJ ..
-                                                        ", " ..
-                                                            aK ..
-                                                                ", " ..
-                                                                    ak ..
-                                                                        ", " ..
-                                                                            aj ..
-                                                                                ", " ..
-                                                                                    tostring(aL) ..
-                                                                                        ", " ..
-                                                                                            aM ..
-                                                                                                ", " ..
-                                                                                                    aN ..
-                                                                                                        ", " ..
-                                                                                                            aO .. ")\n"
-                    )
-                else
-                    appendfile(
-                        "TDS_AutoStrat/LastStrat.txt",
-                        "TDS:Place('" ..
-                            ah ..
-                                "', " ..
-                                    aH .. ", " .. aI .. ", " .. aJ .. ", " .. aK .. ", " .. ak .. ", " .. aj .. ")\n"
-                    )
-                end
                 if isgame() then
                     repeat
                         wait()
@@ -925,10 +867,6 @@ if not getgenv().ExecutedAlr then
     function a:Upgrade(aS, aK, ak, aj, aP)
         spawn(
             function()
-                appendfile(
-                    "TDS_AutoStrat/LastStrat.txt",
-                    "TDS:Upgrade(" .. aS .. ", " .. aK .. ", " .. ak .. ", " .. aj .. ")\n"
-                )
                 if isgame() then
                     local ah = aS
                     repeat
@@ -982,10 +920,6 @@ if not getgenv().ExecutedAlr then
     function a:Sell(aS, aK, ak, aj, aP)
         spawn(
             function()
-                appendfile(
-                    "TDS_AutoStrat/LastStrat.txt",
-                    "TDS:Sell(" .. aS .. ", " .. aK .. ", " .. ak .. ", " .. aj .. ")\n"
-                )
                 if isgame() then
                     repeat
                         wait()
@@ -1003,7 +937,6 @@ if not getgenv().ExecutedAlr then
     function a:Skip(aK, ak, aj)
         spawn(
             function()
-                appendfile("TDS_AutoStrat/LastStrat.txt", "TDS:Skip(" .. aK .. ", " .. ak .. ", " .. aj .. ")\n")
                 if isgame() then
                     repeat
                         wait()
@@ -1017,10 +950,6 @@ if not getgenv().ExecutedAlr then
     function a:Ability(aS, ao, aK, ak, aj)
         spawn(
             function()
-                appendfile(
-                    "TDS_AutoStrat/LastStrat.txt",
-                    "TDS:Ability(" .. aS .. ', "' .. ao .. '", ' .. aK .. ", " .. ak .. ", " .. aj .. ")\n"
-                )
                 if isgame() then
                     repeat
                         wait()
@@ -1034,11 +963,6 @@ if not getgenv().ExecutedAlr then
     function a:AutoChain(aU, aV, aW, aK, ak, aj)
         spawn(
             function()
-                appendfile(
-                    "TDS_AutoStrat/LastStrat.txt",
-                    "TDS:AutoChain(" ..
-                        aU .. ", " .. aV .. ", " .. aW .. ", " .. aK .. ", " .. ak .. ", " .. aj .. ")\n"
-                )
                 if isgame() then
                     repeat
                         wait()
@@ -1123,10 +1047,6 @@ if not getgenv().ExecutedAlr then
     function a:Target(aS, aK, ak, aj)
         spawn(
             function()
-                appendfile(
-                    "TDS_AutoStrat/LastStrat.txt",
-                    "TDS:Target(" .. aS .. ", " .. aK .. ", " .. ak .. ", " .. aj .. ")\n"
-                )
                 if isgame() then
                     repeat
                         wait()
