@@ -161,13 +161,6 @@ if not getgenv().ExecutedAlr then
                 game.Lighting.FogStart = 10000000
                 game.Lighting.FogEnd = 10000000
                 game.Lighting.Brightness = 1
-                if getgenv().CameraSys == true then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, 55, 0)
-                else
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, 25, 0)
-                end
                 if game.CoreGui:FindFirstChild("AutoStratsLogger") then
                     game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
                 end
