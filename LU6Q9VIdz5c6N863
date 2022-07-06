@@ -161,7 +161,6 @@ if not getgenv().ExecutedAlr then
                 game.Lighting.FogStart = 10000000
                 game.Lighting.FogEnd = 10000000
                 game.Lighting.Brightness = 1
- 
                 if game.CoreGui:FindFirstChild("AutoStratsLogger") then
                     game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
                 end
@@ -508,7 +507,7 @@ if not getgenv().ExecutedAlr then
     function skip()
         if isgame() then
             f:InvokeServer("Waves", "Skip")
-            getgenv().output("Skipped Wave")
+            pcall(function() getgenv().output("Skipped Wave") end)
         end
     end
     function conv(aj, ak)
@@ -533,11 +532,7 @@ if not getgenv().ExecutedAlr then
                 "Activate",
                 {["Troop"] = game.Workspace.Towers[tostring(ah)], ["Name"] = ao}
             )
-            getgenv().output(
-                "Used Ability (Troop " ..
-                    getTroopType(game.Workspace.Towers[tostring(ah)]) ..
-                        " With Number " .. tostring(ah) .. " Ability " .. ao .. ")"
-            )
+            pcall(function() getgenv().output("Used Ability (Troop " .. getTroopType(game.Workspace.Towers[tostring(ah)]) .. " With Number " .. tostring(ah) .. " Ability " .. ao .. ")") end)
         end
     end
     writefile("TDS_AutoStrat/LastStrat.txt", "")
@@ -768,7 +763,7 @@ if not getgenv().ExecutedAlr then
                         aA = f:InvokeServer("Difficulty", "Vote", az)
                         wait()
                     until aA
-                    getgenv().output("Selected Mode (Mode " .. az .. ")")
+                    pcall(function() getgenv().output("Selected Mode (Mode " .. az .. ")") end)
                 end
             )
         end
@@ -917,6 +912,7 @@ if not getgenv().ExecutedAlr then
                         end
                     until aQ or getgenv().PassPlace == true
                     getgenv().Placing = false
+                    pcall(function() getgenv().output("Placed " .. ah) end)
                     getgenv().PassPlace = false
                 end
             end
@@ -942,7 +938,7 @@ if not getgenv().ExecutedAlr then
                     until getgenv().Upgrading == false
                     getgenv().Upgrading = true
                     if not game.Workspace.Towers:FindFirstChild(tostring(ah)) then
-                        getgenv().output("Warning! Troop with id " .. ah .. " has not been placed!")
+                        pcall(function() getgenv().output("Warning! Troop with id " .. ah .. " has not been placed!") end)
                         local aQ = nil
                         local aR = 0
                         repeat
@@ -957,7 +953,7 @@ if not getgenv().ExecutedAlr then
                                 }
                             )
                         until aQ
-                        getgenv().output("Placed " .. aG[aS])
+                        pcall(function() getgenv().output("Placed " .. aG[aS]) end)
                     end
                     local aT = nil
                     repeat
@@ -971,10 +967,8 @@ if not getgenv().ExecutedAlr then
                         wait()
                     until aT
                     getgenv().Upgrading = false
-                    getgenv().output(
-                        "Upgraded (Troop " ..
-                            getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(ah) .. ")"
-                    )
+                     pcall(function() getgenv().output("Placed " .. aG[aS]) end)
+                    pcall(function() getgenv().output("Upgraded (Troop " .. getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(ah) .. ")") end)
                 end
             end
         )
@@ -991,10 +985,7 @@ if not getgenv().ExecutedAlr then
                         wait()
                     until tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value == conv(aj, ak) or
                         tonumber(stateRep:GetAttribute("Wave")) == aK and e.State.Timer.Time.Value + 1 == conv(aj, ak)
-                    getgenv().output(
-                        "Sold (Troop " ..
-                            getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")"
-                    )
+                    pcall(function() getgenv().output("Sold (Troop " .. getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")") end)
                     sell(aS)
                 end
             end
@@ -1054,13 +1045,13 @@ if not getgenv().ExecutedAlr then
                         wait()
                     until game:GetService("Workspace").Towers:FindFirstChild(tostring(aW))
                     if getTroopType(game.Workspace.Towers[tostring(aU)]) ~= "Commander" then
-                        getgenv().output("Error, troop with id " .. aU .. " is not Commander!")
+                        pcall(function() getgenv().output("Error, troop with id " .. aU .. " is not Commander!") end)
                     end
                     if getTroopType(game.Workspace.Towers[tostring(aV)]) ~= "Commander" then
-                        getgenv().output("Error, troop with id " .. aV .. " is not Commander!")
+                        pcall(function() getgenv().output("Error, troop with id " .. aV .. " is not Commander!") end)
                     end
                     if getTroopType(game.Workspace.Towers[tostring(aW)]) ~= "Commander" then
-                        getgenv().output("Error, troop with id " .. aW .. " is not Commander!")
+                        pcall(function() getgenv().output("Error, troop with id " .. aW .. " is not Commander!") end)
                     end
                     function Act(aX)
                         if game:GetService("Workspace").Towers:FindFirstChild(tostring(aX)) then
@@ -1079,7 +1070,7 @@ if not getgenv().ExecutedAlr then
                                     }
                                 )
                             else
-                                getgenv().output("Detected stun on commander " .. tostring(aX) .. ", waiting...")
+                                pcall(function() getgenv().output("Detected stun on commander " .. tostring(aX) .. ", waiting...") end)
                                 repeat
                                     wait()
                                 until not ad.Replicator.Stuns:GetAttribute("1") and
@@ -1096,14 +1087,11 @@ if not getgenv().ExecutedAlr then
                                 )
                             end
                         else
-                            getgenv().output("Commander " .. tostring(aX) .. " removed, aborting AutoChain...")
+                            pcall(function() getgenv().output("Commander " .. tostring(aX) .. " removed, aborting AutoChain...") end)
                             getgenv().breaks = true
                         end
                     end
-                    getgenv().output(
-                        "Activated AutoChain (Troops " ..
-                            tostring(aU) .. ", " .. tostring(aV) .. ", " .. tostring(aW) .. ")"
-                    )
+                    pcall(function() getgenv().output("Activated AutoChain (Troops " .. tostring(aU) .. ", " .. tostring(aV) .. ", " .. tostring(aW) .. ")") end)
                     while wait() do
                         if getgenv().breaks then
                             break
@@ -1141,13 +1129,25 @@ if not getgenv().ExecutedAlr then
                         "Set",
                         {["Troop"] = game.Workspace.Towers:WaitForChild(tostring(aS))}
                     )
-                    getgenv().output(
-                        "Changed Target (Troop " ..
-                            getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")"
-                    )
+                    pcall(function() getgenv().output("Changed Target (Troop " .. getTroopType(game.Workspace.Towers[tostring(aS)]) .. " With Number " .. tostring(aS) .. ")") end)
                 end
             end
         )
+    end
+    if isgame() then
+        did = false
+        while wait() do
+            for h, b in pairs(game.CoreGui:GetDescendants()) do
+                if b:IsA("TextLabel") and b.Text == "Camera" then
+                    b.Parent.Position = UDim2.new(0, 220, 0, 0)
+                    did = true
+                    break
+                end
+            end
+            if did then
+                break
+            end
+        end
     end
 end
 return a
