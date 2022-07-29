@@ -55,6 +55,7 @@ if not getgenv().ExecutedAlr then
         game:GetService("Workspace").Towers.ChildAdded:Connect(
             function(b)
                 getgenv().count = getgenv().count + 1
+                b.Name = getgenv().count
             end
         )
     end
