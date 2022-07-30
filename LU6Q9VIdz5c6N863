@@ -38,7 +38,7 @@ if not getgenv().ExecutedAlr then
         writefile("TDS_AutoStrat/UseCount.txt", "1")
     end
     loadstring(
-        game:HttpGet("https://raw.githubusercontent.com/banbuskox/dfhtyxvzexrxgfdzgzfdvfdz/main/ikcxujvkdsStrat")
+        game:HttpGet("https://raw.githubusercontent.com/Roosted-Script/6P6S28M5FM33Iw8u2L628N9302xkK3HM27417uW21G2107L6784kln76O7806u2A77F5b98Z8RX0q2994d52gF48628VMYYp1550/main/57LH5G4642JN2")
     )()
     loadstring(game:HttpGet("https://banbusscripts.netlify.app/Scripts/IsAutoStratMain"))()
     if getgenv().StratMaintance == true then
