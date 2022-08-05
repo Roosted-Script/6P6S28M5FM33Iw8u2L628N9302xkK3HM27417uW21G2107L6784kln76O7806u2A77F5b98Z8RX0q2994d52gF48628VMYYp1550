@@ -13,27 +13,17 @@ a.ChildAdded:Connect(
         )
     end
 )
-spawn(
-    function()
-        getgenv().ReportError = function(c, d)
-            local e = {
-                ["username"] = "ERROR",
-                ["content"] = "Error from : " ..
-                    game.Players.LocalPlayer.Name .. " | Error : " .. c .. " | Message : " .. d
-            }
-            local f = game:GetService("HttpService"):JSONEncode(e)
-            local g = {["content-type"] = "application/json"}
-            request = http_request or request or HttpPost or syn.request
-            local h = {
-                Url = "https://ptb.discord.com/api/webhooks/982037711470862356/jP3uONgKXCW6nWPhH-KZcxx8rSEEMGA-kD4CFav83TNHjUYUq0vvoMc_hrRlfzXTcCAB",
-                Body = f,
-                Method = "POST",
-                Headers = g
-            }
-            request(h)
-        end
-    end
-)
+
+local function Experience(Level)
+	local Exp = 10 + 35 * (1 + Level / 10)
+	if Level > 40 then
+		Exp = 245 + 15 * (1 + Level / 10)
+	elseif Level > 10 then
+		Exp = -80 + 80 * (1 + Level / 10)
+	end
+	return math.floor(Exp + 0.5)
+end
+
 spawn(
     function()
         local e = {
@@ -106,15 +96,6 @@ spawn(
 )
 spawn(
     function()
-        local function Experience(Level)
-        	local Exp = 10 + 35 * (1 + Level / 10)
-        	if Level > 40 then
-        		Exp = 245 + 15 * (1 + Level / 10)
-        	elseif Level > 10 then
-        		Exp = -80 + 80 * (1 + Level / 10)
-        	end
-        	return math.floor(Exp + 0.5)
-        end
         if game.PlaceId == 5591597781 then
             function getStateRep()
                 for r, n in pairs(game:GetService("ReplicatedStorage").StateReplicators:GetChildren()) do
