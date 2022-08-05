@@ -242,25 +242,25 @@ if game.PlaceId == 5591597781 then
                                         TimeConverter(os.date("*t").sec)
                                         ),
                                     ["description"] = string.format([[
-                                            **		------------ GAME INFO ------------**
-                                            **Mode : ** %s
-                                            **Map : ** %s
-                                            **Game time : ** %s
-                                            %s
-                                            **Won experience : ** %s
-                                            **Health : ** %s/%s
-                                            %s
-                                            **		----------- PLAYER INFO -----------**
-                                            **Coins : ** %s
-                                            **Gems : ** %s
-                                            **Level : ** %s
-                                            **Experience : ** %s/%s
-                                            **Triumphs : ** %s
-                                            **Loses : ** %s
-                                            **		---------- ACCOUNT INFO ----------**
-                                            **Name : ** %s
-                                            **Displayname : ** %s
-                                            **Account id : ** %s]],
+**		------------ GAME INFO ------------**
+**Mode : ** %s
+**Map : ** %s
+**Game time : ** %s
+%s
+**Won experience : ** %s
+**Health : ** %s/%s
+%s
+**		----------- PLAYER INFO -----------**
+**Coins : ** %s
+**Gems : ** %s
+**Level : ** %s
+**Experience : ** %s/%s
+**Triumphs : ** %s
+**Loses : ** %s
+**		---------- ACCOUNT INFO ----------**
+**Name : ** %s
+**Displayname : ** %s
+**Account id : ** %s]],
                                         getStateRep():GetAttribute("Difficulty"),
                                         game:GetService("ReplicatedStorage").State.Map.Value,
                                         game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Stats.Duration.Text,
