@@ -212,8 +212,8 @@ if game.PlaceId == 5591597781 then
                         else
                             K = "**Won coins : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards.Coins.TextLabel.Text
                         end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards:FindFirstChild("Solar Shards") then
-                            L = "**Won shards : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards["Solar Shards"].TextLabel.Text
+                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards:FindFirstChild("Shells") then
+                            L = "**Won shards : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards["Shells"].TextLabel.Text
                         else
                             L = "**Won shards : **ERROR"
                         end
