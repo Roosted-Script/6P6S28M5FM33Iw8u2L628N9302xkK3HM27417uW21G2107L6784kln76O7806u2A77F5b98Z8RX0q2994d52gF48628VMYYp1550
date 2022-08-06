@@ -214,17 +214,13 @@ if game.PlaceId == 5591597781 then
                         end
                         if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards:FindFirstChild("Solar Shards") then
                             L = "**Won shards : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards["Solar Shards"].TextLabel.Text
+                        else
+                            L = "**Won shards : **ERROR"
                         end
                         color = 16744448
-                        if
-                            game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Lose.Visible ==
-                                true
-                         then
+                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Lose.Visible == true then
                             color = 16711680
-                        elseif
-                            game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Triumph.Visible ==
-                                true
-                         then
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Triumph.Visible == true then
                             color = 65280
                         end
                         url = readfile("TDS_AutoStrat/Webhook (Logs).txt")
@@ -233,7 +229,7 @@ if game.PlaceId == 5591597781 then
                             ["embeds"] = {
                                 {
                                     ["title"] = string.format([[
-                                        LOG (%s-%s-%s %s:%s:%s)]], 
+LOG (%s-%s-%s %s:%s:%s)]], 
                                         TimeConverter(os.date("*t").year), 
                                         TimeConverter(os.date("*t").month),
                                         TimeConverter(os.date("*t").day),
@@ -248,6 +244,7 @@ if game.PlaceId == 5591597781 then
 **Game time : ** %s
 %s
 **Won experience : ** %s
+%s
 **Health : ** %s/%s
 %s
 **		----------- PLAYER INFO -----------**
@@ -266,6 +263,7 @@ if game.PlaceId == 5591597781 then
                                         game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Stats.Duration.Text,
                                         K,
                                         game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards.Experience.TextLabel.Text,
+					                    L,
                                         tostring(getStateRep().Health.Value),
                                         getStateRep():GetAttribute("MaxHealth"),
                                         J,
