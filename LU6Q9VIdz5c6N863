@@ -66,6 +66,7 @@ if not getgenv().ExecutedAlr then
     local e = game:WaitForChild("ReplicatedStorage")
     local f = e:WaitForChild("RemoteFunction")
     local g = e:WaitForChild("RemoteEvent")
+    local TweenService = game:GetService("TweenService")
     function isgame()
         if game.PlaceId == 5591597781 then
             return true
@@ -153,10 +154,10 @@ if not getgenv().ExecutedAlr then
         spawn(
             function()
                 wait(3)
-                for h, b in pairs(game:GetService("Lighting"):GetChildren()) do
-                    if b.Name ~= "Sky" then
-                        b:Remove()
-                    end
+                if game:GetService("Lighting"):FindFirstChild("Blur") then
+                    TweenService:Create(game:GetService("Lighting"):WaitForChild("Blur"), TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                    	Size = 0
+                    }):Play()
                 end
                 game.Lighting.FogStart = 10000000
                 game.Lighting.FogEnd = 10000000
