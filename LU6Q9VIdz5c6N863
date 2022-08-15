@@ -739,7 +739,7 @@ if not getgenv().ExecutedAlr then
         makefolder("TDS_AutoStrat")
         writefile("TDS_AutoStrat/Webhook (Logs).txt", "WEBHOOK HERE")
     end
-    writefile("??????????.txt", "KxjhVghCJH")
+    --writefile("??????????.txt", "KxjhVghCJH")
     function a:Mode(az)
         if isgame() then
             spawn(
