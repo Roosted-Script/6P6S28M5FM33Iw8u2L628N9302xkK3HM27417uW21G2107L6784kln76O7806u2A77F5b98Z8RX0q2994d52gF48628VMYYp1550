@@ -699,7 +699,7 @@ function scrip:Mode(mode)
 				jshd = RSRF:InvokeServer('Difficulty', 'Vote', mode)
 				wait()
 			until jshd
-			getgenv().output("Selected Mode (Mode "..mode..")")
+			--getgenv().output("Selected Mode (Mode "..mode..")")
 		end)
 	end
 end
