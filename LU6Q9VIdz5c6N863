@@ -187,7 +187,7 @@ if isgame() then
 	spawn(function()
 		wait(3)
         if game:GetService("Lighting"):FindFirstChild("Blur") then
-            TweenService:Create(game:GetService("Lighting"):WaitForChild("Blur"), TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+            game:GetService("TweenService"):Create(game:GetService("Lighting"):WaitForChild("Blur"), TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
             	Size = 0
             }):Play()
         end
