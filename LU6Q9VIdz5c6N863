@@ -1,5 +1,6 @@
 --Please don't edit code without Money Maker permission :>
 repeat wait() until game:IsLoaded()
+repeat wait() until _G.Webhook
 wait()
 local scrip = {}
 if not getgenv().ExecutedAlr then
