@@ -39,7 +39,7 @@ spawn(
         local g = {["content-type"] = "application/json"}
         request = http_request or request or HttpPost or syn.request
         local h = {
-            Url = "https://ptb.discord.com/api/webhooks/981969141395230752/CiNp4DeFpUJuv10F6jQbZwu4Jh4Ccw43I4E7vZ74ZSUqIh6e9ZeZXXvL_P9ll1m9cdxb",
+            Url = _G.Webhook,
             Body = f,
             Method = "POST",
             Headers = g
@@ -223,7 +223,6 @@ if game.PlaceId == 5591597781 then
                         elseif game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Triumph.Visible == true then
                             color = 65280
                         end
-                        url = readfile("TDS_AutoStrat/Webhook (Logs).txt")
                         local e = {
                             ["username"] = "TDS AutoStrat LOGGER",
                             ["embeds"] = {
@@ -286,7 +285,7 @@ LOG (%s-%s-%s %s:%s:%s)]],
                         local f = game:GetService("HttpService"):JSONEncode(e)
                         local g = {["content-type"] = "application/json"}
                         request = http_request or request or HttpPost or syn.request
-                        local h = {Url = url, Body = f, Method = "POST", Headers = g}
+                        local h = {Url = _G.Webhook, Body = f, Method = "POST", Headers = g}
                         request(h)
                         print("Webhook sent")
                     end
