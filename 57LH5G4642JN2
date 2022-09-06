@@ -166,7 +166,7 @@ if game.PlaceId == 5591597781 then
                         wait(5)
                         getgenv().Webhook = true
                         if readfile("TDS_AutoStrat/PrivateServer.txt") ~= "PRIVATE SERVER LINK HERE" then
-                            if syn and synv3 then
+                            if syn or synv3 then
                                 WebSocketC = nil
                                 Co = 0
                                 repeat
