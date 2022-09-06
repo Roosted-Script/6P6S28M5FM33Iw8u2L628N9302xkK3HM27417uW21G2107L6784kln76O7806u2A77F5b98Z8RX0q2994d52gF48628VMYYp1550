@@ -159,24 +159,44 @@ if not isfolder("TDS_AutoStrat") then
     makefolder("TDS_AutoStrat")
 end
 if game.PlaceId == 5591597781 then
-    spawn(
-        function()
-            while wait(5) do
-                pcall(
-                    function()
-                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Visible == true then
-                            getgenv().Webhook = true
-                            wait(2)
-                            game:GetService("TeleportService"):Teleport(
-                                3260590327,
-                                game:GetService("Players").LocalPlayer
-                            )
+    spawn(function()
+        while wait(5) do
+            pcall(function()
+                    if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Visible == true then
+                        wait(5)
+                        getgenv().Webhook = true
+                        if readfile("TDS_AutoStrat/PrivateServer.txt") ~= "PRIVATE SERVER LINK HERE" then
+                            if syn and synv3 then
+                                WebSocketC = nil
+                                Co = 0
+                                repeat
+                                    spawn(function()
+                                        WebSocketC = syn.websocket.connect("ws://127.0.0.1:1337")
+                                    end)
+                                    Co = Co + 1
+                                    if Co >= 4 then
+                                        getgenv().output("Failed to connect to Private Server Program")
+                                        wait(5)
+                                        game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
+                                    end
+                                    wait(1)
+                                until WebSocketC
+                                WebSocketC:Send(readfile("TDS_AutoStrat/PrivateServer.txt"))
+                                WebSocketC:Close()
+                                repeat
+                                    wait()
+                                until getgenv().SentWebhook
+                                game:Shutdown()
+                            else
+                                game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
+                            end
+                        else
+                            game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
                         end
                     end
-                )
-            end
+                end)
         end
-    )
+    end)
     spawn(
         function()
             while wait(0.1) do
@@ -186,10 +206,7 @@ if game.PlaceId == 5591597781 then
                         makefolder("TDS_AutoStrat")
                         writefile("TDS_AutoStrat/Webhook (Logs).txt", "WEBHOOK HERE")
                     end
-                    if
-                        isfolder("TDS_AutoStrat") and isfile("TDS_AutoStrat/Webhook (Logs).txt") and
-                            readfile("TDS_AutoStrat/Webhook (Logs).txt") ~= "WEBHOOK HERE"
-                     then
+                    if isfolder("TDS_AutoStrat") and isfile("TDS_AutoStrat/Webhook (Logs).txt") and readfile("TDS_AutoStrat/Webhook (Logs).txt") ~= "WEBHOOK HERE" then
                         function TimeConverter(t)
                             if tonumber(t) <= 9 then
                                 return "0" .. tostring(t)
