@@ -14,7 +14,7 @@ spawn(function()
             [3] = "Tower",
             [4] = tostring(troop)
         }
-        game.ReplicatedStorage.RemoteEvent:FireServer(unpack(args))
+	game.ReplicatedStorage.RemoteFunction:InvokeServer(unpack(args))
         end
     end
     function UnEquip()
@@ -26,7 +26,7 @@ spawn(function()
                     [3] = "Tower",
                     [4] = TowerName
                 }
-                game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+                game.ReplicatedStorage.RemoteFunction:InvokeServer(unpack(args))
             end;
         end;
     end
