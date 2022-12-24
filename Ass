@@ -163,8 +163,8 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             noti.Visible = true
             noti.Active = true
             spawn(function()
-            wait(3)
-            noti.Visible = false
+                wait(3)
+                noti.Visible = false
             end)
         end
     end
@@ -193,9 +193,9 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                     Size = 0
                 }):Play()
             end
-            game.Lighting.FogStart = 10000000
-            game.Lighting.FogEnd = 10000000
-            game.Lighting.Brightness = 1
+            --game.Lighting.FogStart = 10000000
+            --game.Lighting.FogEnd = 10000000
+            --game.Lighting.Brightness = 1
             if game.CoreGui:FindFirstChild("AutoStratsLogger") then
                 game.CoreGui:FindFirstChild("AutoStratsLogger"):Remove()
             end
@@ -467,14 +467,14 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             wait(0.5)
             while true do end
         end
-        RSRE:FireServer("Inventory", "Equip", "tower", troop)
+        RSRF:InvokeServer("Inventory", "Equip", "Tower", troop)
         if not getgenv().GoldenPerks then
             getgenv().GoldenPerks = {}
         end
         if table.find(getgenv().GoldenPerks, troop) then
-            RSRE:InvokeServer("Inventory", "Equip", "Golden", troop)
+            RSRF:InvokeServer("Inventory", "Equip", "Golden", troop)
         else
-            RSRE:InvokeServer("Inventory", "Unequip", "Golden", troop)
+            RSRF:InvokeServer("Inventory", "Unequip", "Golden", troop)
         end
         getgenv().status = "Equipped "..troop
     end
