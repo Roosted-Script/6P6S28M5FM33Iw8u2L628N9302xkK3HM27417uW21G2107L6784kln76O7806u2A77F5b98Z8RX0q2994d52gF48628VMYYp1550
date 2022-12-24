@@ -790,7 +790,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             end
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave or getgenv().AbortThisShit and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -798,7 +798,6 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                     return 0
                 end
                 wait(aK(times))
-
                 --repeat task.wait() until getgenv().Placing == false -- edit it!
                 --getgenv().Placing = true  -- edit it!
                 local placeCheck = nil
