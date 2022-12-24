@@ -790,7 +790,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             end
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -841,7 +841,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                         end
                     end)
                 end]]
-            until placeCheck
+                until placeCheck
                 --until placeCheck or getgenv().PassPlace == true -- edit it!
                 --getgenv().Placing = false -- edit it!
                 getgenv().output("Placed "..troop)
@@ -855,7 +855,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             if isgame() then
                 local troop = id
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave or game.Workspace.Towers:FindFirstChild(tostring(troop)) or getgenv().AbortThisShit and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or game.Workspace.Towers:FindFirstChild(tostring(troop)) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) and game.Workspace.Towers:FindFirstChild(tostring(al)) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) and game.Workspace.Towers:FindFirstChild(tostring(al)) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -891,13 +891,13 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                         end
                     end
                     repeat task.wait() until price <= game:GetService("Players").LocalPlayer.Cash.Value]]
-                    local upgradeCheck = nil
-                    repeat
-                        upgradeCheck = RSRF:InvokeServer("Troops","Upgrade","Set",{["Troop"] = game.Workspace.Towers:WaitForChild(tostring(troop))})
-                        task.wait()
-                    until upgradeCheck
-                    --getgenv().Upgrading = false -- edit it!
-                    getgenv().output("Upgraded (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(troop)..")")
+                local upgradeCheck = nil
+                repeat
+                    upgradeCheck = RSRF:InvokeServer("Troops","Upgrade","Set",{["Troop"] = game.Workspace.Towers:WaitForChild(tostring(troop))})
+                    task.wait()
+                until upgradeCheck
+                --getgenv().Upgrading = false -- edit it!
+                getgenv().output("Upgraded (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(troop)..")")
             end
         end)
     end
@@ -906,7 +906,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             appendfile(fileprefix.."LastStrat.txt","TDS:Sell("..id..", "..wave..", "..timem..", "..times..", "..tostring(inbetween or "false")..")\n")
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -925,7 +925,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             appendfile(fileprefix.."LastStrat.txt","TDS:Skip("..wave..", "..timem..", "..times..", "..tostring(inbetween or "false")..")\n")
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -942,7 +942,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             appendfile(fileprefix.."LastStrat.txt",'TDS:Ability('..id..', "'..aname..'", '..wave..', '..timem..', '..times..", "..tostring(inbetween or "false")..")\n")
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -959,7 +959,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             appendfile(fileprefix.."LastStrat.txt","TDS:AutoChain("..id1..", "..id2..", "..id3..", "..wave..", "..timem..", "..times..", "..tostring(inbetween or "false")..")\n")
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -1015,7 +1015,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             appendfile(fileprefix.."LastStrat.txt","TDS:Target("..id..", "..wave..", "..timem..", "..times..", "..tostring(inbetween or "false")..")\n")
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -1035,7 +1035,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             appendfile(fileprefix.."LastStrat.txt","TDS:SellAllFarms("..wave..", "..timem..", "..times..", "..tostring(inbetween or "false")..")\n")
                 if isgame() then
                     if not inbetween then
-                        repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
+                        repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) or getgenv().AbortThisShit
                     else
                         aM(wave, times)
                     end
