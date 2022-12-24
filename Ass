@@ -1030,7 +1030,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         end)
     end
     --wave, timem, times, inbetween
-    function a:SellAllFarms(wave, timem, times, a_)
+    function scrip:SellAllFarms(wave, timem, times, a_)
         spawn(function()
             appendfile(fileprefix.."LastStrat.txt","TDS:SellAllFarms("..wave..", "..timem..", "..times..", "..tostring(inbetween or "false")..")\n")
                 if isgame() then
