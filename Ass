@@ -74,7 +74,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
     end
     stateRep = nil
     if isgame() then
-        function getStateRep() for i,v in pairs(game:GetService("ReplicatedStorage").StateReplicators:GetChildren()) do if v:GetAttribute("TimeScale") then return v end end end
+        function getStateRep() for i,v in pairs(RS.StateReplicators:GetChildren()) do if v:GetAttribute("TimeScale") then return v end end end
         repeat stateRep = getStateRep() until stateRep
     end
     spawn(function()
@@ -392,14 +392,14 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
     end
     end)
     if not isgame() then
-        repeat task.wait(1) until game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Session", "Search", "Login").Time
-        if os.time() - game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Session", "Search", "Login").Time >= 86400 then
-            game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Login", "Claim")
-            game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Session", "Search", "Login")
+        repeat task.wait(1) until RSRF:InvokeServer("Session", "Search", "Login").Time
+        if os.time() - RSRF:InvokeServer("Session", "Search", "Login").Time >= 86400 then
+            RSRF:InvokeServer("Login", "Claim")
+            RSRF:InvokeServer("Session", "Search", "Login")
         end
     if getgenv().AutoBuy then
     getgenv().status = "Buying crates..."
-    local data = require(game:GetService("ReplicatedStorage").Assets.Crates[getgenv().Crate].Data)
+    local data = require(RS.Assets.Crates[getgenv().Crate].Data)
     local pricetype,price = data.Price.Type,data.Price.Value
     if pricetype == "Coins" then
     ltimes = math.floor(game.Players.LocalPlayer.Coins.Value / price)
@@ -409,7 +409,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
     print("Bought "..getgenv().Crate.." Crate")
     wait(1)
     table1 = {}
-    for TowerName, Tower in next, game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Inventory", "Execute", "Crates", "Open", {["Name"] = getgenv().Crate}) do
+    for TowerName, Tower in next, RSRF:InvokeServer("Inventory", "Execute", "Crates", "Open", {["Name"] = getgenv().Crate}) do
         table.insert(table1, Tower)
     end;
     if readfile(fileprefix.."Webhook (Logs).txt") ~= "WEBHOOK HERE" then
@@ -467,14 +467,14 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             wait(0.5)
             while true do end
         end
-        RSRE:FireServer("Inventory","Execute","Troops","Add",{["Name"] = troop})
+        RSRE:FireServer("Inventory", "Equip", "tower", troop)
         if not getgenv().GoldenPerks then
             getgenv().GoldenPerks = {}
         end
         if table.find(getgenv().GoldenPerks, troop) then
-            RSRE:FireServer("Inventory","Execute","Troops", "GoldenPerks", {["Troop"] = troop, ["Enabled"] = true})
+            RSRE:InvokeServer("Inventory", "Equip", "Golden", troop)
         else
-            RSRE:FireServer("Inventory","Execute","Troops", "GoldenPerks", {["Troop"] = troop, ["Enabled"] = false})
+            RSRE:InvokeServer("Inventory", "Unequip", "Golden", troop)
         end
         getgenv().status = "Equipped "..troop
     end
@@ -719,7 +719,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         getgenv().TroopName4NEW = t4
         getgenv().TroopName5NEW = t5
         getgenv().troops5 = {}
-        for i,v in next, game.ReplicatedStorage.RemoteFunction:InvokeServer("Session", "Search", "Inventory.Troops") do
+        for i,v in next, RSRE:InvokeServer("Session", "Search", "Inventory.Troops") do
             table.insert(getgenv().troops5, i)
         end
         CheckTroop(t1)
@@ -728,9 +728,9 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         CheckTroop(t4)
         CheckTroop(t5)
         if not isgame() and not getgenv().IsMultiStrat then
-            for TowerName, Tower in next, game.ReplicatedStorage.RemoteFunction:InvokeServer("Session", "Search", "Inventory.Troops") do
+            for TowerName, Tower in next, RSRF:InvokeServer("Session", "Search", "Inventory.Troops") do
                 if (Tower.Equipped) then
-                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer("Inventory","Execute","Troops","Remove",{["Name"] = TowerName})
+                    RSRE:InvokeServer("Inventory","Unequip","Tower",{["Name"] = TowerName})
                     getgenv().status = "Removed "..TowerName
                 end;
             end;
@@ -764,18 +764,18 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         local save_wave = 0
         local ready = false
         stateRep = nil
-        function getStateRep() for i,v in pairs(game:GetService("ReplicatedStorage").StateReplicators:GetChildren()) do if v:GetAttribute("TimeScale") then return v end end end
+        function getStateRep() for i,v in pairs(RS.StateReplicators:GetChildren()) do if v:GetAttribute("TimeScale") then return v end end end
         repeat stateRep = getStateRep() until stateRep
-        conn = game:GetService("ReplicatedStorage").State.Timer.Time:GetPropertyChangedSignal("Value"):Connect(function()
-                if math.abs(save_time - game:GetService("ReplicatedStorage").State.Timer.Time.Value) > 1 and save_wave == stateRep:GetAttribute("Wave") and stateRep:GetAttribute("Wave") == wave then
+        conn = RS.State.Timer.Time:GetPropertyChangedSignal("Value"):Connect(function()
+                if math.abs(save_time - RS.State.Timer.Time.Value) > 1 and save_wave == stateRep:GetAttribute("Wave") and stateRep:GetAttribute("Wave") == wave then
                     conn:Disconnect()
                     local aS = aL(times)
                     repeat
                         task.wait()
-                    until game:GetService("ReplicatedStorage").State.Timer.Time.Value == aS
+                    until RS.State.Timer.Time.Value == aS
                     ready = true
                 end
-                save_time = game:GetService("ReplicatedStorage").State.Timer.Time.Value
+                save_time = RS.State.Timer.Time.Value
                 save_wave = stateRep:GetAttribute("Wave")
             end
         )
@@ -986,11 +986,11 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                     if game:GetService("Workspace").Towers:FindFirstChild(tostring(Comm)) then
                         local Tower = game:GetService("Workspace").Towers:FindFirstChild(tostring(Comm))
                         if not Tower.Replicator.Stuns:GetAttribute("1") and not Tower.Replicator.Stuns:GetAttribute("2") and not Tower.Replicator.Stuns:GetAttribute("3") then
-                            game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Troops","Abilities","Activate",{["Troop"]=game:GetService("Workspace").Towers:FindFirstChild(tostring(Comm)),["Name"] = "Call Of Arms"})
+                            RSRF:InvokeServer("Troops","Abilities","Activate",{["Troop"]=game:GetService("Workspace").Towers:FindFirstChild(tostring(Comm)),["Name"] = "Call Of Arms"})
                         else
                             getgenv().output("Detected stun on commander "..tostring(Comm)..", waiting...")
                             repeat task.wait() until not Tower.Replicator.Stuns:GetAttribute("1") and not Tower.Replicator.Stuns:GetAttribute("2") and not Tower.Replicator.Stuns:GetAttribute("3")
-                            game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Troops","Abilities","Activate",{["Troop"]=game:GetService("Workspace").Towers:FindFirstChild(tostring(Comm)),["Name"] = "Call Of Arms"})
+                            RSRF:InvokeServer("Troops","Abilities","Activate",{["Troop"]=game:GetService("Workspace").Towers:FindFirstChild(tostring(Comm)),["Name"] = "Call Of Arms"})
                         end	
                     else
                         getgenv().output("Commander "..tostring(Comm).." removed, aborting AutoChain...")
