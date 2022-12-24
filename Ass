@@ -719,7 +719,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         getgenv().TroopName4NEW = t4
         getgenv().TroopName5NEW = t5
         getgenv().troops5 = {}
-        for i,v in next, RSRE:InvokeServer("Session", "Search", "Inventory.Troops") do
+        for i,v in next, RSRF:InvokeServer("Session", "Search", "Inventory.Troops") do
             table.insert(getgenv().troops5, i)
         end
         CheckTroop(t1)
@@ -730,7 +730,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         if not isgame() and not getgenv().IsMultiStrat then
             for TowerName, Tower in next, RSRF:InvokeServer("Session", "Search", "Inventory.Troops") do
                 if (Tower.Equipped) then
-                    RSRE:InvokeServer("Inventory","Unequip","Tower",{["Name"] = TowerName})
+                    RSRF:InvokeServer("Inventory","Unequip","Tower",{["Name"] = TowerName})
                     getgenv().status = "Removed "..TowerName
                 end;
             end;
