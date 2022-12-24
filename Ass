@@ -790,7 +790,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             end
             if isgame() then
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave or game.Workspace.Towers:FindFirstChild(tostring(troop)) or getgenv().AbortThisShit and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or game.Workspace.Towers:FindFirstChild(tostring(troop)) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) or tonumber(stateRep:GetAttribute("Wave")) == wave or getgenv().AbortThisShit and (RS.State.Timer.Time.Value + 1) == conv(aL(times), timem) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
@@ -915,6 +915,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                 if getgenv().AbortThisShit then
                     return 0
                 end
+                getgenv().output("Changed Target (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(id)..")")
                 getgenv().output("Sold (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(id)..")")
                 sell(id)
             end
