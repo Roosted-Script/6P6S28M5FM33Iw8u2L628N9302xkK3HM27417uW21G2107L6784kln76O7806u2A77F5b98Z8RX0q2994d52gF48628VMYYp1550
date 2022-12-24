@@ -1047,8 +1047,8 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                         return 0
                     end
                     for i, v in pairs(game.Workspace.Towers:GetChildren()) do
-                        if getTroopType(v) == "Farm" and k.Owner.Value == game.Players.LocalPlayer.UserId then
-                            h:InvokeServer("Troops", "Sell", {["Troop"] = v})
+                        if getTroopType(v) == "Farm" and v.Owner.Value == game.Players.LocalPlayer.UserId then
+                            RSRF:InvokeServer("Troops", "Sell", {["Troop"] = v})
                             task.wait()
                         end
                     end
