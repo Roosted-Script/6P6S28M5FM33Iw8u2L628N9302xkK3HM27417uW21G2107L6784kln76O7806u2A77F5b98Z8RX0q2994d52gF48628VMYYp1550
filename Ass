@@ -392,8 +392,11 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
     end
     end)
     if not isgame() then
-    RSRF:InvokeServer("Login","Claim")
-    RSRF:InvokeServer("Session","Search","Login")
+        repeat task.wait(1) until game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Session", "Search", "Login").Time
+        if os.time() - game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Session", "Search", "Login").Time >= 86400 then
+            game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Login", "Claim")
+            game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Session", "Search", "Login")
+        end
     if getgenv().AutoBuy then
     getgenv().status = "Buying crates..."
     local data = require(game:GetService("ReplicatedStorage").Assets.Crates[getgenv().Crate].Data)
@@ -855,7 +858,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
             if isgame() then
                 local troop = id
                 if not inbetween then
-                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) and game.Workspace.Towers:FindFirstChild(tostring(al)) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) and game.Workspace.Towers:FindFirstChild(tostring(al)) or getgenv().AbortThisShit
+                    repeat task.wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(aL(times), timem) and game.Workspace.Towers:FindFirstChild(tostring(troop)) or tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value + 1 == conv(aL(times), timem) and game.Workspace.Towers:FindFirstChild(tostring(troop)) or getgenv().AbortThisShit
                 else
                     aM(wave, times)
                 end
