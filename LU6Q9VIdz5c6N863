@@ -463,14 +463,14 @@ function EquipTroop(troop)
 		wait(0.5)
 		while true do end
 	end
-	RSRE:FireServer("Inventory","Execute","Troops","Add",{["Name"] = troop})
+	RSRE:FireServer("Inventory","Equip","Tower",troop)
 	if not getgenv().GoldenPerks then
 		getgenv().GoldenPerks = {}
 	end
 	if table.find(getgenv().GoldenPerks, troop) then
-		RSRE:FireServer("Inventory","Execute","Troops", "GoldenPerks", {["Troop"] = troop, ["Enabled"] = true})
+		RSRE:FireServer("Inventory","Equip", "GoldenPerks", troop)
 	else
-		RSRE:FireServer("Inventory","Execute","Troops", "GoldenPerks", {["Troop"] = troop, ["Enabled"] = false})
+		RSRE:FireServer("Inventory","Unequip", "GoldenPerks", troop)
 	end
 	getgenv().status = "Equipped "..troop
 end
@@ -726,7 +726,7 @@ function scrip:Loadout(t1, t2, t3, t4, t5)
 	if not isgame() and not getgenv().IsMultiStrat then
 		for TowerName, Tower in next, game.ReplicatedStorage.RemoteFunction:InvokeServer("Session", "Search", "Inventory.Troops") do
 			if (Tower.Equipped) then
-				game:GetService("ReplicatedStorage").RemoteEvent:FireServer("Inventory","Execute","Troops","Remove",{["Name"] = TowerName})
+				game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer("Inventory","Unequip","Tower", TowerName)
 				getgenv().status = "Removed "..TowerName
 			end;
 		end;
