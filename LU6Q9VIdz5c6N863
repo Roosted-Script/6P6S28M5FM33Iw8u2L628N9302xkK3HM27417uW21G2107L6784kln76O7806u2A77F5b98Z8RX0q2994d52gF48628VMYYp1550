@@ -936,7 +936,6 @@ function scrip:AutoChain(id1, id2, id3, wave, timem, times)
 end
 function scrip:Target(id, types, wave, timem, times, inbetween)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt","TDS:Target("..id..", "..types..", "..wave..", "..timem..", "..tostring(inbetween or"false")..")\n")
 		appendfile(fileprefix.."LastStrat.txt","TDS:Target("..id..", "..types..", "..wave..", "..timem..", "..times..")\n")
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
