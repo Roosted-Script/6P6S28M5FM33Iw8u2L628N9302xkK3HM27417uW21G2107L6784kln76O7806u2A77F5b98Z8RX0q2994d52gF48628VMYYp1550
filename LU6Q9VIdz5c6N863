@@ -754,6 +754,7 @@ function scrip:Place(troop, posx, posy, posz, wave, timem, times, rotarg, rotx, 
 		end
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
+			print("passed-1")
 			table.insert(PlacedTr, troop)
 			table.insert(PlacedTr, posx)
 			table.insert(PlacedTr, posy)
@@ -763,11 +764,13 @@ function scrip:Place(troop, posx, posy, posz, wave, timem, times, rotarg, rotx, 
 			local placeCheck = nil
 			local placeCount = 0
 			getgenv().PassPlace = false
+			print("passed-2")
 			repeat
 				if rotarg then
 				placeCheck = RSRF:InvokeServer("Troops","Place",troop,{["Rotation"] = CFrame.new(rotx,roty,rotz),["Position"] = Vector3.new(posx, posy, posz)})
 				--placeCheck = RSRF:InvokeServer("Troops","Place","Scout",{["Rotation"] = CFrame.new(rotx,roty,rotz),["Position"] = Vector3.new(posx, posy, posz)})	
 				elseif not rotarg then
+				print("passed-3")
 				placeCheck = RSRF:InvokeServer("Troops","Place",troop,{["Rotation"] = CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1),["Position"] = Vector3.new(posx, posy, posz)})
 				--placeCheck = RSRF:InvokeServer("Troops","Place","Scout",{["Rotation"] = CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1),["Position"] = Vector3.new(posx, posy, posz)})
 				end
