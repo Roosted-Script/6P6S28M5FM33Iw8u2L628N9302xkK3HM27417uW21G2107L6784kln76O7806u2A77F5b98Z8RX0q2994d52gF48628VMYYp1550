@@ -463,14 +463,14 @@ function EquipTroop(troop)
 		wait(0.5)
 		while true do end
 	end
-	RSRE:FireServer("Inventory","Equip","Tower",troop)
+	RSRF:InvokeServer("Inventory","Equip","Tower",troop)
 	if not getgenv().GoldenPerks then
 		getgenv().GoldenPerks = {}
 	end
 	if table.find(getgenv().GoldenPerks, troop) then
-		RSRE:FireServer("Inventory","Equip", "GoldenPerks", troop)
+		RSRF:InvokeServer("Inventory","Equip", "GoldenPerks", troop)
 	else
-		RSRE:FireServer("Inventory","Unequip", "GoldenPerks", troop)
+		RSRF:InvokeServer("Inventory","Unequip", "GoldenPerks", troop)
 	end
 	getgenv().status = "Equipped "..troop
 end
