@@ -748,9 +748,9 @@ function scrip:Place(troop, posx, posy, posz, wave, timem, times, rotarg, rotx, 
 			rotarg = false
 		end
 		if rotarg then
-			appendfile(fileprefix.."LastStrat.txt","TDS:Place('"..troop.."', "..posx..", "..posy..", "..posz..", "..wave..", "..timem..", "..times..", "..tostring(rotarg)..", "..rotx..", "..roty..", "..rotz..")\n")
+			appendfile(fileprefix.."LastStrat.txt","TDS:Place('"..troop.."', "..posx..", "..posy..", "..posz..", "..wave..", "..timem..", "..times..", "..tostring(rotarg)..", "..rotx..", "..roty..", "..rotz..tostring(inbetween or "false")..")\n")
 		else
-			appendfile(fileprefix.."LastStrat.txt","TDS:Place('"..troop.."', "..posx..", "..posy..", "..posz..", "..wave..", "..timem..", "..times..")\n")
+			appendfile(fileprefix.."LastStrat.txt","TDS:Place('"..troop.."', "..posx..", "..posy..", "..posz..", "..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		end
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
@@ -810,7 +810,7 @@ function scrip:Place(troop, posx, posy, posz, wave, timem, times, rotarg, rotx, 
 end
 function scrip:Upgrade(id, wave, timem, times, inbetween)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt","TDS:Upgrade("..id..", "..wave..", "..timem..", "..times..")\n")
+		appendfile(fileprefix.."LastStrat.txt","TDS:Upgrade("..id..", "..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		if isgame() then
 			local troop = id
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) and game.Workspace.Towers:FindFirstChild(tostring(troop)) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem) and game.Workspace.Towers:FindFirstChild(tostring(troop))
@@ -860,7 +860,7 @@ function scrip:Upgrade(id, wave, timem, times, inbetween)
 end
 function scrip:Sell(id, wave, timem, times, inbetween)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt","TDS:Sell("..id..", "..wave..", "..timem..", "..times..")\n")
+		appendfile(fileprefix.."LastStrat.txt","TDS:Sell("..id..", "..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
 			getgenv().output("Sold (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(id)..")")
@@ -870,7 +870,7 @@ function scrip:Sell(id, wave, timem, times, inbetween)
 end
 function scrip:Skip(wave, timem, times)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt","TDS:Skip("..wave..", "..timem..", "..times..")\n")
+		appendfile(fileprefix.."LastStrat.txt","TDS:Skip("..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
 			skip()
@@ -879,7 +879,7 @@ function scrip:Skip(wave, timem, times)
 end
 function scrip:Ability(id, aname, wave, timem, times)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt",'TDS:Ability('..id..', "'..aname..'", '..wave..', '..timem..', '..times..')\n')
+		appendfile(fileprefix.."LastStrat.txt",'TDS:Ability('..id..', "'..aname..'", '..wave..', '..timem..', '..times..tostring(inbetween or "false")..")\n")
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
 			ability(id, aname)
@@ -888,7 +888,7 @@ function scrip:Ability(id, aname, wave, timem, times)
 end
 function scrip:AutoChain(id1, id2, id3, wave, timem, times)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt","TDS:AutoChain("..id1..", "..id2..", "..id3..", "..wave..", "..timem..", "..times..")\n")
+		appendfile(fileprefix.."LastStrat.txt","TDS:AutoChain("..id1..", "..id2..", "..id3..", "..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
 			repeat wait() until game:GetService("Workspace").Towers:FindFirstChild(tostring(id1))
@@ -936,7 +936,7 @@ function scrip:AutoChain(id1, id2, id3, wave, timem, times)
 end
 function scrip:Target(id, types, wave, timem, times, inbetween)
 	spawn(function()
-		appendfile(fileprefix.."LastStrat.txt","TDS:Target("..id..", "..types..", "..wave..", "..timem..", "..times..")\n")
+		appendfile(fileprefix.."LastStrat.txt","TDS:Target("..id..", "..types..", "..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		if isgame() then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
 			repeat wait() until game.Workspace.Towers:FindFirstChild(tostring(id))
