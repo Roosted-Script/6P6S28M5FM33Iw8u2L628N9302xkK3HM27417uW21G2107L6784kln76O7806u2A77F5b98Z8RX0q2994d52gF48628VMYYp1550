@@ -468,9 +468,9 @@ function EquipTroop(troop)
 		getgenv().GoldenPerks = {}
 	end
 	if table.find(getgenv().GoldenPerks, troop) then
-		RSRF:InvokeServer("Inventory","Equip", "GoldenPerks", troop)
+		RSRF:InvokeServer("Inventory","Equip", "Golden", troop)
 	else
-		RSRF:InvokeServer("Inventory","Unequip", "GoldenPerks", troop)
+		RSRF:InvokeServer("Inventory","Unequip", "Golden", troop)
 	end
 	getgenv().status = "Equipped "..troop
 end
