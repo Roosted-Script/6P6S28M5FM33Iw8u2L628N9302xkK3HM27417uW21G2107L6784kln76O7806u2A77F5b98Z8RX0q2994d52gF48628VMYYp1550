@@ -753,7 +753,10 @@ function scrip:Place(troop, posx, posy, posz, wave, timem, times, rotarg, rotx, 
 			appendfile(fileprefix.."LastStrat.txt","TDS:Place('"..troop.."', "..posx..", "..posy..", "..posz..", "..wave..", "..timem..", "..times..tostring(inbetween or "false")..")\n")
 		end
 		if isgame() then
+			--if not inbetween then
 			repeat wait() until tonumber(stateRep:GetAttribute("Wave")) == wave and RS.State.Timer.Time.Value == conv(times, timem) or tonumber(stateRep:GetAttribute("Wave")) == wave and (RS.State.Timer.Time.Value + 1) == conv(times, timem)
+			--else
+			--	aS(wave, times)
 			print("passed-1")
 			table.insert(PlacedTr, troop)
 			table.insert(PlacedTr, posx)
