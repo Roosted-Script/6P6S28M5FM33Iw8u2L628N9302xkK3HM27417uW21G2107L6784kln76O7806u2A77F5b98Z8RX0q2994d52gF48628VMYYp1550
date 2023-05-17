@@ -527,7 +527,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
         generateline = generateline.."}\n"
         appendfile(fileprefix.."LastStrat.txt",generateline)
     end
-    appendfile(fileprefix.."LastStrat.txt","local TDS = loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Roosted-Script/6P6S28M5FM33Iw8u2L628N9302xkK3HM27417uW21G2107L6784kln76O7806u2A77F5b98Z8RX0q2994d52gF48628VMYYp1550/main/Ass", true))()\n")
+    appendfile(fileprefix.."LastStrat.txt","local TDS = loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Roosted-Script/6P6S28M5FM33Iw8u2L628N9302xkK3HM27417uW21G2107L6784kln76O7806u2A77F5b98Z8RX0q2994d52gF48628VMYYp1550/main/Ass\", true))()\n")
     function scrip:Map(map, antimulti, type)
         appendfile(fileprefix.."LastStrat.txt","TDS:Map('"..map.."', '"..tostring(antimulti).."', '"..type.."')\n")
         getgenv().mapc = map
