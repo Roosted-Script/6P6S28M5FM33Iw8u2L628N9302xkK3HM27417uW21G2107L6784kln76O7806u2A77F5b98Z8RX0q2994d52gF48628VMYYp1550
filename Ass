@@ -917,7 +917,7 @@ if game.PlaceId == 3260590327 and not getgenv().ExecutedAlr or game.PlaceId == 5
                 if getgenv().AbortThisShit then
                     return 0
                 end
-                getgenv().output("Changed Target (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(id)..")")
+                --getgenv().output("Changed Target (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(id)..")")
                 getgenv().output("Sold (Troop "..getTroopType(game.Workspace.Towers[tostring(id)]).." With Number "..tostring(id)..")")
                 sell(id)
             end

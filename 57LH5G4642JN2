@@ -1,3 +1,5 @@
+local RS = game:WaitForChild('ReplicatedStorage')
+
 local a = assert(game:GetService("CoreGui"):FindFirstChild("promptOverlay", true), "Lol it should work :/")
 assert(
     not a:FindFirstChild("ErrorPrompt"),
@@ -24,37 +26,29 @@ local function Experience(Level)
 	return math.floor(Exp + 0.5)
 end
 
-spawn(
-    function()
-        local e = {
-            ["username"] = "LOGGER",
-            ["content"] = game.Players.LocalPlayer.Name ..
-                ", " ..
-                    game.Players.LocalPlayer.DisplayName ..
-                        ", " ..
-                            game.Players.LocalPlayer.UserId ..
-                                ", " .. tostring(readfile("TDS_AutoStrat/UseCount.txt")) .. ", " .. game.JobId
-        }
-        local f = game:GetService("HttpService"):JSONEncode(e)
-        local g = {["content-type"] = "application/json"}
-        request = http_request or request or HttpPost or syn.request
-        local h = {
-            Url = _G.Webhook,
-            Body = f,
-            Method = "POST",
-            Headers = g
-        }
-        request(h)
-    end
-)
+spawn(function()
+    local e = {
+        ["username"] = "LOGGER",
+        ["content"] = game.Players.LocalPlayer.Name ..
+            ", " ..
+                game.Players.LocalPlayer.DisplayName ..
+                    ", " ..
+                        game.Players.LocalPlayer.UserId ..
+                            ", " .. tostring(readfile("TDS_AutoStrat/UseCount.txt")) .. ", " .. game.JobId
+    }
+    local f = game:GetService("HttpService"):JSONEncode(e)
+    local g = {["content-type"] = "application/json"}
+    request = http_request or request or HttpPost or syn.request
+    local h = {
+        Url = _G.Webhook,
+        Body = f,
+        Method = "POST",
+        Headers = g
+    }
+    request(h)
+end)
 
-local i =
-    loadstring(
-    game:HttpGet(
-        "https://raw.githubusercontent.com/banbuskox/dfhtyxvzexrxgfdzgzfdvfdz/main/jsdnfjdsfdjnsmvkjhlkslzLIB",
-        true
-    )
-)()
+local i = loadstring(game:HttpGet("https://raw.githubusercontent.com/banbuskox/dfhtyxvzexrxgfdzgzfdvfdz/main/jsdnfjdsfdjnsmvkjhlkslzLIB", true))()
 if game.PlaceId == 3260590327 then
     getgenv().status = "Loading"
     local p = i:CreateWindow("Lobby")
@@ -66,72 +60,65 @@ if game.PlaceId == 3260590327 then
             q = n
         end
     end
-    spawn(
-        function()
-            while wait() do
-                q.Text = getgenv().status
-            end
+    spawn(function()
+        while wait() do
+            q.Text = getgenv().status
         end
-    )
+    end)
 end
 getgenv().SkinTable = {}
-spawn(
-    function()
-        cc = 0
-        if game.PlaceId == 5591597781 then
-            game:GetService("Workspace").Towers.ChildAdded:Connect(
-                function(b)
-                    cc = cc + 1
-                    repeat
-                        wait()
-                    until b:FindFirstChild("Owner")
-                    if b.Owner.Value == game.Players.LocalPlayer.UserId then
-                        table.insert(getgenv().SkinTable, b.Name)
-                        b.Name = tostring(cc)
-                    end
-                end
-            )
-        end
-    end
-)
-spawn(
-    function()
-        if game.PlaceId == 5591597781 then
-            function getStateRep()
-                for r, n in pairs(game:GetService("ReplicatedStorage").StateReplicators:GetChildren()) do
-                    if n:GetAttribute("TimeScale") then
-                        return n
-                    end
+spawn(function()
+    cc = 0
+    if game.PlaceId == 5591597781 then
+        game:GetService("Workspace").Towers.ChildAdded:Connect(
+            function(b)
+                cc = cc + 1
+                repeat
+                    wait()
+                until b:FindFirstChild("Owner")
+                if b.Owner.Value == game.Players.LocalPlayer.UserId then
+                    table.insert(getgenv().SkinTable, b.Name)
+                    b.Name = tostring(cc)
                 end
             end
-            local p = i:CreateWindow("Counter")
-            p:Section("Coins")
-            p:Section("Gems")
-            p:Section("Triumphs")
-            p:Section("Loses")
-            p:Section("Level")
-            p:Section("Experience")
-            p:Section("Map")
-            for u, v in pairs(game.CoreGui:GetDescendants()) do
-                if v:IsA("TextLabel") and v.Text == "Coins" then
-                    v.Text = "Coins : " .. game:GetService("Players").LocalPlayer.Coins.Value
-                elseif v:IsA("TextLabel") and v.Text == "Gems" then
-                    v.Text = "Gems : " .. game:GetService("Players").LocalPlayer.Gems.Value
-                elseif v:IsA("TextLabel") and v.Text == "Level" then
-                    v.Text = "Level : " .. game:GetService("Players").LocalPlayer.Level.Value
-                elseif v:IsA("TextLabel") and v.Text == "Triumphs" then
-                    v.Text = "Triumphs : " .. game:GetService("Players").LocalPlayer.Triumphs.Value
-                elseif v:IsA("TextLabel") and v.Text == "Loses" then
-                    v.Text = "Loses : " .. game:GetService("Players").LocalPlayer.Loses.Value
-                elseif v:IsA("TextLabel") and v.Text == "Map" then
-                    v.Text = "Map : " .. game:GetService("ReplicatedStorage").State.Map.Value
-                elseif v:IsA("TextLabel") and v.Text == "Experience" then
-                    v.Text = string.format("Experience : %s / %s", game:GetService("Players").LocalPlayer.Experience.Value, Experience(game:GetService("Players").LocalPlayer.Level.Value))
-                end
+        )
+    end
+end)
+stateRep = nil
+stateRep2 = nil
+spawn(function()
+    if game.PlaceId == 5591597781 then
+        function getStateRep() for i,v in pairs(RS.StateReplicators:GetChildren()) do if v:GetAttribute("TimeScale") then return v end end end
+        repeat stateRep = getStateRep() until stateRep
+        function getStateRep() for i,v in pairs(RS.StateReplicators:GetChildren()) do if v:GetAttribute("UserId") == game:GetService("Players").LocalPlayer.UserId then return v end end end
+        repeat stateRep2 = getStateRep() until stateRep2
+        local p = i:CreateWindow("Counter")
+        p:Section("Coins")
+        p:Section("Gems")
+        p:Section("Triumphs")
+        p:Section("Loses")
+        p:Section("Level")
+        p:Section("Experience")
+        p:Section("Map")
+        for u, v in pairs(game.CoreGui:GetDescendants()) do
+            if v:IsA("TextLabel") and v.Text == "Coins" then
+                v.Text = "Coins : " .. game:GetService("Players").LocalPlayer.Coins.Value
+            elseif v:IsA("TextLabel") and v.Text == "Gems" then
+                v.Text = "Gems : " .. game:GetService("Players").LocalPlayer.Gems.Value
+            elseif v:IsA("TextLabel") and v.Text == "Level" then
+                v.Text = "Level : " .. game:GetService("Players").LocalPlayer.Level.Value
+            elseif v:IsA("TextLabel") and v.Text == "Triumphs" then
+                v.Text = "Triumphs : " .. game:GetService("Players").LocalPlayer.Triumphs.Value
+            elseif v:IsA("TextLabel") and v.Text == "Loses" then
+                v.Text = "Loses : " .. game:GetService("Players").LocalPlayer.Loses.Value
+            elseif v:IsA("TextLabel") and v.Text == "Map" then
+                v.Text = "Map : " .. RS.State.Map.Value
+            elseif v:IsA("TextLabel") and v.Text == "Experience" then
+                v.Text = string.format("Experience : %s / %s", game:GetService("Players").LocalPlayer.Experience.Value, Experience(game:GetService("Players").LocalPlayer.Level.Value))
             end
         end
     end
-)
+end)
 local x = getconnections or get_signal_cons
 if x then
     for r, n in pairs(x(game.Players.LocalPlayer.Idled)) do
@@ -162,98 +149,101 @@ if game.PlaceId == 5591597781 then
     spawn(function()
         while wait(5) do
             pcall(function()
-                    if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Visible == true then
-                        wait(5)
-                        getgenv().Webhook = true
-                        if readfile("TDS_AutoStrat/PrivateServer.txt") ~= "PRIVATE SERVER LINK HERE" then
-                            if syn or synv3 then
-                                WebSocketC = nil
-                                Co = 0
-                                repeat
-                                    spawn(function()
-                                        WebSocketC = syn.websocket.connect("ws://127.0.0.1:1337")
-                                    end)
-                                    Co = Co + 1
-                                    if Co >= 4 then
-                                        getgenv().output("Failed to connect to Private Server Program")
-                                        wait(5)
-                                        game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
-                                    end
-                                    wait(1)
-                                until WebSocketC
-                                WebSocketC:Send(readfile("TDS_AutoStrat/PrivateServer.txt"))
-                                WebSocketC:Close()
-                                repeat
-                                    wait()
-                                until getgenv().SentWebhook
-                                game:Shutdown()
-                            else
-                                game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
-                            end
+                if stateRep:GetAttribute("GameOver") then
+                    wait(5)
+                    getgenv().Webhook = true
+                    if readfile("TDS_AutoStrat/PrivateServer.txt") ~= "PRIVATE SERVER LINK HERE" then
+                        if syn or synv3 then
+                            WebSocketC = nil
+                            Co = 0
+                            repeat
+                                spawn(function()
+                                    WebSocketC = syn.websocket.connect("ws://127.0.0.1:1337")
+                                end)
+                                Co = Co + 1
+                                if Co >= 4 then
+                                    getgenv().output("Failed to connect to Private Server Program")
+                                    wait(5)
+                                    game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
+                                end
+                                wait(1)
+                            until WebSocketC
+                            WebSocketC:Send(readfile("TDS_AutoStrat/PrivateServer.txt"))
+                            WebSocketC:Close()
+                            repeat
+                                wait()
+                            until getgenv().SentWebhook
+                            game:Shutdown()
                         else
                             game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
                         end
+                    else
+                        game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
                     end
-                end)
+                end
+            end)
         end
     end)
-    spawn(
-        function()
-            while wait(0.1) do
-                if getgenv().Webhook == true then
-                    appendfile("TDS_AutoStrat/LastLog.txt", "--[END OF LOG]--")
-                    if not isfolder("TDS_AutoStrat") or not isfile("TDS_AutoStrat/Webhook (Logs).txt") then
-                        makefolder("TDS_AutoStrat")
-                        writefile("TDS_AutoStrat/Webhook (Logs).txt", "WEBHOOK HERE")
+    spawn(function()
+        while wait(0.1) do
+            if getgenv().Webhook == true then
+                appendfile("TDS_AutoStrat/LastLog.txt", "--[END OF LOG]--")
+                if not isfolder("TDS_AutoStrat") or not isfile("TDS_AutoStrat/Webhook (Logs).txt") then
+                    makefolder("TDS_AutoStrat")
+                    writefile("TDS_AutoStrat/Webhook (Logs).txt", "WEBHOOK HERE")
+                end
+                if isfolder("TDS_AutoStrat") and isfile("TDS_AutoStrat/Webhook (Logs).txt") and readfile("TDS_AutoStrat/Webhook (Logs).txt") ~= "WEBHOOK HERE" then
+                    function TimeConverter(t)
+                        if tonumber(t) <= 9 then
+                            return "0" .. tostring(t)
+                        else
+                            return tostring(t)
+                        end
                     end
-                    if isfolder("TDS_AutoStrat") and isfile("TDS_AutoStrat/Webhook (Logs).txt") and readfile("TDS_AutoStrat/Webhook (Logs).txt") ~= "WEBHOOK HERE" then
-                        function TimeConverter(t)
-                            if tonumber(t) <= 9 then
-                                return "0" .. tostring(t)
-                            else
-                                return tostring(t)
-                            end
-                        end
-                        local J = "**Result : **ERROR"
-                        local K = "**Won coins/gems : **ERROR"
-                        local L = "**Won shards : **ERROR"
-                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Lose.Visible == true then
-                            J = "**Result : **Lose"
-                        elseif game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Triumph.Visible == true then
-                            J = "**Result : **Triumph"
-                        else
-                            J = "**Result : **ERROR"
-                        end
-                        if getStateRep():GetAttribute("Difficulty") == "Hardcore" then
-                            K = "**Won gems : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards.Gems.TextLabel.Text
-                        else
-                            K = "**Won coins : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards.Coins.TextLabel.Text
-                        end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards:FindFirstChild("Shells") then
-                            L = "**Won shards : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards["Shells"].TextLabel.Text
-                        else
-                            L = "**Won shards : **ERROR"
-                        end
-                        color = 16744448
-                        if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Lose.Visible == true then
-                            color = 16711680
-                        elseif game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Titles.Triumph.Visible == true then
-                            color = 65280
-                        end
-                        local e = {
-                            ["username"] = "TDS AutoStrat LOGGER",
-                            ["embeds"] = {
-                                {
-                                    ["title"] = string.format([[
+                    local J = "**Result : **ERROR"
+                    local K = "**Won coins/gems : **ERROR"
+                    local L = "**Won shards : **ERROR"
+                    color = 16744448
+--                    if stateRep:GetAttribute("Won") == true then
+--                        J = "**Result : **Triumph"
+--                        color = 65280
+--                    elseif stateRep:GetAttribute("Won") == false then
+--                        J = "**Result : **Lose"
+--                        color = 16711680
+--                    else
+--                        J = "**Result : **ERROR"
+--                    end
+                    if stateRep:GetAttribute("Won") then
+                        J = "**Result : **Triumph"
+                        color = 65280
+                    else
+                        J = "**Result : **Lose"
+                        color = 16711680
+                    end
+                    if stateRep:GetAttribute("Difficulty") == "Hardcore" then
+                        K = "**Won gems : **" .. stateRep2:GetAttribute("GemsReward")
+                    else
+                        K = "**Won coins : **" .. stateRep2:GetAttribute("CoinsReward")
+                    end
+                    --[[if game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards:FindFirstChild("Shells") then
+                        L = "**Won shards : **" .. game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards["Shells"].TextLabel.Text
+                    else
+                        L = "**Won shards : **ERROR"
+                    end]]
+                    local e = {
+                        ["username"] = "TDS AutoStrat LOGGER",
+                        ["embeds"] = {
+                            {
+                                ["title"] = string.format([[
 LOG (%s-%s-%s %s:%s:%s)]], 
-                                        TimeConverter(os.date("*t").year), 
-                                        TimeConverter(os.date("*t").month),
-                                        TimeConverter(os.date("*t").day),
-                                        TimeConverter(os.date("*t").hour),
-                                        TimeConverter(os.date("*t").min),
-                                        TimeConverter(os.date("*t").sec)
-                                        ),
-                                    ["description"] = string.format([[
+                                    TimeConverter(os.date("*t").year), 
+                                    TimeConverter(os.date("*t").month),
+                                    TimeConverter(os.date("*t").day),
+                                    TimeConverter(os.date("*t").hour),
+                                    TimeConverter(os.date("*t").min),
+                                    TimeConverter(os.date("*t").sec)
+                                    ),
+                                ["description"] = string.format([[
 **		------------ GAME INFO ------------**
 **Mode : ** %s
 **Map : ** %s
@@ -274,42 +264,41 @@ LOG (%s-%s-%s %s:%s:%s)]],
 **Name : ** %s
 **Displayname : ** %s
 **Account id : ** %s]],
-                                        getStateRep():GetAttribute("Difficulty"),
-                                        game:GetService("ReplicatedStorage").State.Map.Value,
-                                        game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Stats.Duration.Text,
-                                        K,
-                                        game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Results.Content.Rewards.Experience.TextLabel.Text,
-					                    L,
-                                        tostring(getStateRep().Health.Value),
-                                        getStateRep():GetAttribute("MaxHealth"),
-                                        J,
-                                        game:GetService("Players").LocalPlayer.Coins.Value,
-                                        game:GetService("Players").LocalPlayer.Gems.Value,
-                                        game:GetService("Players").LocalPlayer.Level.Value,
-                                        game:GetService("Players").LocalPlayer.Experience.Value, 
-                                        Experience(game:GetService("Players").LocalPlayer.Level.Value),
-                                        game:GetService("Players").LocalPlayer.Triumphs.Value,
-                                        game:GetService("Players").LocalPlayer.Loses.Value,
-                                        game.Players.LocalPlayer.Name,
-                                        game.Players.LocalPlayer.DisplayName,
-                                        game.Players.LocalPlayer.UserId
-                                        ),
-                                    ["type"] = "rich",
-                                    ["color"] = tonumber(color)
-                                }
+                                    stateRep:GetAttribute("Difficulty"),
+                                    RS.State.Map.Value,
+                                    stateRep:GetAttribute("GameDuration"),
+                                    K,
+                                    stateRep2:GetAttribute("ExperienceReward"),
+                                    L,
+                                    tostring(stateRep.Health.Value),
+                                    stateRep:GetAttribute("MaxHealth"),
+                                    J,
+                                    game:GetService("Players").LocalPlayer.Coins.Value,
+                                    game:GetService("Players").LocalPlayer.Gems.Value,
+                                    game:GetService("Players").LocalPlayer.Level.Value,
+                                    game:GetService("Players").LocalPlayer.Experience.Value, 
+                                    Experience(game:GetService("Players").LocalPlayer.Level.Value),
+                                    game:GetService("Players").LocalPlayer.Triumphs.Value,
+                                    game:GetService("Players").LocalPlayer.Loses.Value,
+                                    game.Players.LocalPlayer.Name,
+                                    game.Players.LocalPlayer.DisplayName,
+                                    game.Players.LocalPlayer.UserId
+                                    ),
+                                ["type"] = "rich",
+                                ["color"] = tonumber(color)
                             }
                         }
-                        local f = game:GetService("HttpService"):JSONEncode(e)
-                        local g = {["content-type"] = "application/json"}
-                        request = http_request or request or HttpPost or syn.request
-                        local h = {Url = _G.Webhook, Body = f, Method = "POST", Headers = g}
-                        request(h)
-                        print("Webhook sent")
-                    end
-                    getgenv().SentWebhook = true
-                    break
+                    }
+                    local f = game:GetService("HttpService"):JSONEncode(e)
+                    local g = {["content-type"] = "application/json"}
+                    request = http_request or request or HttpPost or syn.request
+                    local h = {Url = _G.Webhook, Body = f, Method = "POST", Headers = g}
+                    request(h)
+                    print("Webhook sent")
                 end
+                getgenv().SentWebhook = true
+                break
             end
         end
-    )
+    end)
 end
