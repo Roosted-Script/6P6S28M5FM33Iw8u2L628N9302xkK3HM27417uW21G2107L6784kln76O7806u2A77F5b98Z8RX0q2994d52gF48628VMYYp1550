@@ -200,6 +200,23 @@ if game.PlaceId == 5591597781 then
                             return tostring(t)
                         end
                     end
+                    function INGAMETimeConverter(t)
+                        local min
+                        local sec
+                        fast = math.floor(math.fmod(t, 3600) / 60)
+                        last = math.floor(math.fmod(t, 60))
+                        if fast > 1 then
+                            min = " mins"
+                        else
+                            min = " min"
+                        end
+                        if last > 1 then
+                            sec = " secs"
+                        else
+                            sec = " sec"
+                        end;
+                        return fast > 0 and fast .. min .. " and " .. last .. sec or last .. sec
+                    end
                     local J = "**Result : **ERROR"
                     local K = "**Won coins/gems : **ERROR"
                     local L = "**Won shards : **ERROR"
@@ -266,12 +283,13 @@ LOG (%s-%s-%s %s:%s:%s)]],
 **Account id : ** %s]],
                                     stateRep:GetAttribute("Difficulty"),
                                     RS.State.Map.Value,
-                                    stateRep:GetAttribute("GameDuration"),
+                                    INGAMETimeConverter(stateRep:GetAttribute("GameDuration")),
                                     K,
                                     stateRep2:GetAttribute("ExperienceReward"),
                                     L,
-                                    tostring(stateRep.Health.Value),
-                                    stateRep:GetAttribute("MaxHealth"),
+                                    tostring(RS.State.Health.Current.Value),
+                                    tostring(RS.State.Health.Max.Value),
+                                    --stateRep:GetAttribute("MaxHealth"),
                                     J,
                                     game:GetService("Players").LocalPlayer.Coins.Value,
                                     game:GetService("Players").LocalPlayer.Gems.Value,
