@@ -279,6 +279,8 @@ end
 if game.PlaceId == 5591597781 then
     spawn(function()
         repeat task.wait() until stateRep:GetAttribute("GameOver")
+        wait(1)
+        Webhook_Send()
         if readfile("TDS_AutoStrat/PrivateServer.txt") ~= "PRIVATE SERVER LINK HERE" then
             if syn or synv3 then
                 WebSocketC = nil
