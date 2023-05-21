@@ -275,7 +275,6 @@ LOG (%s-%s-%s %s:%s:%s)]],
     end
 end
 
-end
 if game.PlaceId == 5591597781 then
     spawn(function()
         repeat task.wait() until stateRep:GetAttribute("GameOver")
