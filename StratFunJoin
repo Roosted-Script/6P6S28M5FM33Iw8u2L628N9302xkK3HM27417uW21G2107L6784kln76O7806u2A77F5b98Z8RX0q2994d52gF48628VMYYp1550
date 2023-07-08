@@ -42,13 +42,17 @@ spawn(function()
 		repeat stateRep = getStateRep() until stateRep
 		if stateRep:GetAttribute("IsPrivateServer") then
 			local New_Maps = {}
-
 			for i, v in pairs(getgenv().Maps) do
 				table.insert(New_Maps, i)
 			end
 			random_map = New_Maps[math.random(1,#New_Maps)]
 			getgenv().map = random_map
+			UnEquip()
+			for i,v in next, getgenv().Maps[random_map] do
+				EquipTroop(v)
+			end
 			RSRF:InvokeServer("LobbyVoting", "Override", random_map)
+			while wait() do if workspace:GetAttribute("Map1") == random_map then break end end
 			RSRE:FireServer("LobbyVoting", "Ready")
 		else
 			getgenv().map = game:GetService("ReplicatedStorage").State.Map.Value
