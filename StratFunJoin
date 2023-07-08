@@ -38,7 +38,16 @@ spawn(function()
         end;
     end
     if game.PlaceId == 5591597781 then
-    	getgenv().map = game:GetService("ReplicatedStorage").State.Map.Value
+		function getStateRep() for i,v in pairs(RS.StateReplicators:GetChildren()) do if v:GetAttribute("TimeScale") then return v end end end
+		repeat stateRep = getStateRep() until stateRep
+		if stateRep:GetAttribute("IsPrivateServer") then
+			random_map = getgenv().Maps[math.random(1,#getgenv().Maps)]
+			getgenv().map = random_map
+			RSRF:InvokeServer("LobbyVoting", "Override", random_map)
+			RSRE:FireServer("LobbyVoting", "Ready")
+		else
+			getgenv().map = game:GetService("ReplicatedStorage").State.Map.Value
+		end
     else
 		if not (getgenv().MultiStratType == "Hardcore") and workspace:GetAttribute("PrivateServer") then
 			RSRF:InvokeServer("Multiplayer", "single_create")
