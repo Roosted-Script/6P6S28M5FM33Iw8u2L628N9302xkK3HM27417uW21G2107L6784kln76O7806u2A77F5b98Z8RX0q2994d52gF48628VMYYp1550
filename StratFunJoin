@@ -52,7 +52,8 @@ spawn(function()
 				EquipTroop(v)
 			end
 			RSRF:InvokeServer("LobbyVoting", "Override", random_map)
-			while wait() do if workspace:GetAttribute("Map1") == random_map then break end end
+			--while wait() do if workspace:GetAttribute("Map1") == random_map then break end end --no working
+			wait(1.2)
 			RSRE:FireServer("LobbyVoting", "Ready")
 		else
 			getgenv().map = game:GetService("ReplicatedStorage").State.Map.Value
