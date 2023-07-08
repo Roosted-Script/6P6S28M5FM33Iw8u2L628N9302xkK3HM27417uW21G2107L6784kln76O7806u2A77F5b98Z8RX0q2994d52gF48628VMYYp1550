@@ -40,7 +40,7 @@ spawn(function()
     if game.PlaceId == 5591597781 then
     	getgenv().map = game:GetService("ReplicatedStorage").State.Map.Value
     else
-		if not getgenv().MultiStratType == "Hardcore" and workspace:GetAttribute("PrivateServer") then
+		if not (getgenv().MultiStratType == "Hardcore") and workspace:GetAttribute("PrivateServer") then
 			RSRF:InvokeServer("Multiplayer", "single_create")
 			RSRF:InvokeServer("Multiplayer", "single_start", {["count"] = 1, ["mode"] = "survival"})
 		end
